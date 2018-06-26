@@ -10,7 +10,7 @@ import java.util.Date;
 public class EmailUtil {
     private static final  String CONTENT_TYPE_STRING = "Content-type";
     private static final  String CONTENT_TYPE= "text/HTML; charset=UTF-8";
-
+//TODO hard coded for now
     public void sendEmail(Session session, String toEmail, String subject, String body){
         try
         {
