@@ -19,8 +19,8 @@ import java.io.InputStream;
 public class ResourceController {
 
     @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = "application/pdf")
-    public ResponseEntity<InputStreamResource> getAsPdf() throws IOException {
-        InputStream in = PdfUtil.createPdf();
+    public ResponseEntity<InputStreamResource> getAsPdf() throws Exception {
+        InputStream in = new PdfUtil().createPdf();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
