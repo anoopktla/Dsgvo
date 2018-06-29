@@ -146,7 +146,7 @@ public class PdfUtil {
 //footer
             PDStreamUtils.write(contentStream, "www.logicline.de", PDType1Font.HELVETICA, 8.0f, 500f, 50f, Color.RED);
             document.addPage(page);
-            document.addPage(getSecondPage(document));
+            document.addPage(getSecondPage());
             contentStream.close();
 
 
@@ -170,7 +170,8 @@ public class PdfUtil {
         return null;
     }
 
-    private PDPage getSecondPage(PDDocument document) throws Exception{
+    private PDPage getSecondPage() throws Exception{
+        PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
@@ -196,7 +197,7 @@ public class PdfUtil {
 
         float yPosition = 550;
 
-        BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, document, page, true, drawContent);
+        BaseTable table = new BaseTable(720f, yStartNewPage, bottomMargin, tableWidth, margin, document, page, true, drawContent);
 
 
         Row<PDPage> headerRow = table.createRow(15f);
@@ -222,9 +223,46 @@ public class PdfUtil {
         row.createCell(50, "Unterschrift:");
         row.createCell(50, "Unterschrift:");
         table.draw();
-        PDStreamUtils.write(contentStream, "Übersicht Anlagen", PDType1Font.HELVETICA, 12.0f, 50f, 420f, Color.BLACK);
+       PDStreamUtils.write(contentStream, "Ansprechpartner Datenschutz des Auftraggebers", PDType1Font.HELVETICA, 12.0f, 50f, 600f, Color.BLACK);
 
-        PDStreamUtils.write(contentStream, "Ansprechpartner Datenschutz des Auftraggebers", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
+    //    PDStreamUtils.write(contentStream, "Ansprechpartner Datenschutz des Auftraggebers", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
+        //
+
+        table = new BaseTable(580, 240, bottomMargin, tableWidth, margin, document, page, true, drawContent);
+
+
+        headerRow = table.createRow(15f);
+        cell = headerRow.createCell(50, "Name und Vorname");
+        cell.setFillColor(Color.WHITE);
+        table.addHeaderRow(headerRow);
+        cell = headerRow.createCell(50, "Funktion");
+        cell.setFillColor(Color.lightGray);
+        table.addHeaderRow(headerRow);
+        row = table.createRow(12);
+        row.createCell(50, "Sample data");
+        row.createCell(50, "Sample data");
+        table.draw();
+
+        PDStreamUtils.write(contentStream, "Ansprechpartner Datenschutz des Auftragnehmers", PDType1Font.HELVETICA, 12.0f, 50, 500f, Color.BLACK);
+        //
+
+        table = new BaseTable(485, 240, bottomMargin, tableWidth, margin, document, page, true, drawContent);
+
+
+        headerRow = table.createRow(15f);
+        cell = headerRow.createCell(50, "Name und Vorname");
+        cell.setFillColor(Color.WHITE);
+        table.addHeaderRow(headerRow);
+        cell = headerRow.createCell(50, "Funktion");
+        cell.setFillColor(Color.lightGray);
+        table.addHeaderRow(headerRow);
+        row = table.createRow(12);
+        row.createCell(50, "Sample data");
+        row.createCell(50, "Sample data");
+        table.draw();
+
+ //       PDStreamUtils.write(contentStream, "Anlage 2: Gegenstand der Datenverarbeitung", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
+ //       PDStreamUtils.write(contentStream, "Gegenstand und Dauer der Datenverarbeitung sind wie folgt geplant:", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
         //
 
         table = new BaseTable(240, 240, bottomMargin, tableWidth, margin, document, page, true, drawContent);
@@ -241,46 +279,11 @@ public class PdfUtil {
         row.createCell(50, "Sample data");
         row.createCell(50, "Sample data");
         table.draw();
-
-        PDStreamUtils.write(contentStream, "Ansprechpartner Datenschutz des Auftragnehmers", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
-        //
-
-        table = new BaseTable(240, 240, bottomMargin, tableWidth, margin, document, page, true, drawContent);
-
-
-        headerRow = table.createRow(15f);
-        cell = headerRow.createCell(50, "Name und Vorname");
-        cell.setFillColor(Color.WHITE);
-        table.addHeaderRow(headerRow);
-        cell = headerRow.createCell(50, "Funktion");
-        cell.setFillColor(Color.lightGray);
-        table.addHeaderRow(headerRow);
-        row = table.createRow(12);
-        row.createCell(50, "Sample data");
-        row.createCell(50, "Sample data");
-        table.draw();
-
-        PDStreamUtils.write(contentStream, "Anlage 2: Gegenstand der Datenverarbeitung", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "Gegenstand und Dauer der Datenverarbeitung sind wie folgt geplant:", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
-        //
-
-        table = new BaseTable(240, 240, bottomMargin, tableWidth, margin, document, page, true, drawContent);
-
-
-        headerRow = table.createRow(15f);
-        cell = headerRow.createCell(50, "Name und Vorname");
-        cell.setFillColor(Color.WHITE);
-        table.addHeaderRow(headerRow);
-        cell = headerRow.createCell(50, "Funktion");
-        cell.setFillColor(Color.lightGray);
-        table.addHeaderRow(headerRow);
-        row = table.createRow(12);
-        row.createCell(50, "Sample data");
-        row.createCell(50, "Sample data");
-        table.draw();
-        PDStreamUtils.write(contentStream, "Ergänzend wird auf die Leistungsbeschreibung des Hauptvertrags verwiesen.", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
+  //      PDStreamUtils.write(contentStream, "Ergänzend wird auf die Leistungsbeschreibung des Hauptvertrags verwiesen.", PDType1Font.HELVETICA, 12.0f, 50, 741.88f, Color.BLACK);
 //footer
         PDStreamUtils.write(contentStream, "www.logicline.de", PDType1Font.HELVETICA, 8.0f, 500f, 50f, Color.RED);
+        contentStream.close();
+
 
         return page;
     }

@@ -25,6 +25,7 @@ public class Customer {
     private String zipCode;
     private String city;
     private String country;
+    private byte[] pdfDocument;
 
 
 
@@ -151,5 +152,13 @@ public class Customer {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public byte[] getPdfDocument() {
+        return pdfDocument;
+    }
+
+    public void setPdfDocument(byte[] pdfDocument) {
+        this.pdfDocument = pdfDocument;
     }
 }
