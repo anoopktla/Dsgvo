@@ -1,5 +1,7 @@
 package de.logicline.dsgvo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Customer {
     private String zipCode;
     private String city;
     private String country;
+    @JsonIgnore
     private byte[] pdfDocument;
 
 

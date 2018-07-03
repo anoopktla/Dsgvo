@@ -1,6 +1,11 @@
 package de.logicline.dsgvo.controller;
 
+import de.logicline.dsgvo.model.Customer;
+import de.logicline.dsgvo.util.CustomerUtil;
+import de.logicline.dsgvo.util.EmailUtil;
 import de.logicline.dsgvo.util.PdfUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -18,9 +23,16 @@ import java.io.InputStream;
 @Controller
 public class ResourceController {
 
+    @Autowired
+    PdfUtil pdfUtil;
+    @Autowired
+    EmailUtil emailUtil;
+
+
     @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = "application/pdf")
     public ResponseEntity<InputStreamResource> getAsPdf() throws Exception {
-        InputStream in = new PdfUtil().createPdf();
+        Customer customer = CustomerUtil.createDummyCustomer();
+        InputStream in = pdfUtil.createPdf(customer);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
@@ -34,5 +46,12 @@ public class ResourceController {
         ResponseEntity<InputStreamResource> response = new ResponseEntity<>(
                 new InputStreamResource(in), headers, HttpStatus.OK);
         return response;
+    }
+
+    @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.GET)
+    public  String sendEmailTest(@PathVariable(value = "id") String id){
+        emailUtil.sendEmail(id,"test email","this is really a DSGVO test");
+
+        return "sent successfully";
     }
 }

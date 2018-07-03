@@ -24,7 +24,7 @@ public class CustomerController {
     public Customer addCustomer(@Valid @RequestBody Customer customer){
 
         try {
-            customer.setPdfDocument(IOUtils.toByteArray(new PdfUtil().createPdf()));
+            customer.setPdfDocument(IOUtils.toByteArray(new PdfUtil().createPdf(customer)));
         }
         catch (Exception e){
 
