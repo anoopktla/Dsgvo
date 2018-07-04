@@ -27,8 +27,12 @@ public class Customer {
     private String zipCode;
     private String city;
     private String country;
-    @JsonIgnore
-    private byte[] pdfDocument;
+    private String cc;
+    private String bcc;
+    private  String toEmail;
+
+
+
 
 
 
@@ -156,12 +160,27 @@ public class Customer {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public byte[] getPdfDocument() {
-        return pdfDocument;
+    public String getCc() {
+        return cc;
     }
 
-    public void setPdfDocument(byte[] pdfDocument) {
-        this.pdfDocument = pdfDocument;
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+
+    public String getBcc() {
+        return bcc;
+    }
+
+    public void setBcc(String bcc) {
+        this.bcc = bcc;
+    }
+
+    public String getToEmail() {
+        return toEmail;
+    }
+
+    public void setToEmail(String toEmail) {
+        this.toEmail = toEmail;
     }
 }

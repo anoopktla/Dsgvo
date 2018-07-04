@@ -1,5 +1,7 @@
 package de.logicline.dsgvo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,9 @@ public class Adv {
     private String categoryOfDataSubjects;
     private Date validFrom;
     private Date validTo;
+
+    @JsonIgnore
+    private byte[] pdfDocument;
 
 
 
@@ -73,6 +78,14 @@ public class Adv {
 
     public void setValidTo(Date validTo) {
         this.validTo = validTo;
+    }
+
+    public byte[] getPdfDocument() {
+        return pdfDocument;
+    }
+
+    public void setPdfDocument(byte[] pdfDocument) {
+        this.pdfDocument = pdfDocument;
     }
 
    /* public Set<String> getTom() {

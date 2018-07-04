@@ -42,7 +42,6 @@ public class EmailUtil {
             MimeMessage msg = new MimeMessage(getSession());
             //set message headers
             msg.addHeader(CONTENT_TYPE_STRING, CONTENT_TYPE);
-
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 

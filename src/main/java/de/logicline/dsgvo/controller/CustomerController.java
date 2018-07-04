@@ -3,6 +3,7 @@ package de.logicline.dsgvo.controller;
 import de.logicline.dsgvo.dao.CustomerRepository;
 import de.logicline.dsgvo.model.Adv;
 import de.logicline.dsgvo.model.Customer;
+import de.logicline.dsgvo.service.CustomerService;
 import de.logicline.dsgvo.util.PdfUtil;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +18,21 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
+
+
     @Autowired
-    CustomerRepository customerRepository;
+    CustomerService customerService;
 
     @PostMapping("/customers")
     public Customer addCustomer(@Valid @RequestBody Customer customer){
 
-        try {
-            customer.setPdfDocument(IOUtils.toByteArray(new PdfUtil().createPdf(customer)));
-        }
-        catch (Exception e){
-
-        }
-
-        return customerRepository.save(customer);
+       return customerService.addOrModifyCustomer(customer);
 
     }
     @GetMapping("/customers")
     public Iterable<Customer> getCustomers(){
-        return customerRepository.findAll();
+
+        return customerService.getAllCustomers();
+
     }
 }
