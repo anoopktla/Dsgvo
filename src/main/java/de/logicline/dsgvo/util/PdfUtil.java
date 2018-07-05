@@ -20,7 +20,9 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import javax.imageio.ImageIO;
 
@@ -35,8 +37,8 @@ public class PdfUtil {
     public InputStream createPdf(Customer customer) throws Exception {
         try {
 
-            PDDocument document = PDDocument.load(new File(getClass().getResource("/pdf/Template_logicline_de.pdf").getFile()));
-            PDDocument document2 = PDDocument.load(new File(getClass().getResource("/pdf/Template_logicline_2_de.pdf").getFile()));
+            PDDocument document = PDDocument.load(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_de.pdf"));
+            PDDocument document2 = PDDocument.load(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_2_de.pdf"));
 
             document.addPage(getFirstPage(customer));
             document.addPage(getSecondPage(customer));
@@ -63,7 +65,7 @@ public class PdfUtil {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
         Locale locale = Locale.ENGLISH;
 
-        Image image = new Image(ImageIO.read(new File(getClass().getResource("/pdf/llogo.png").getFile())));
+        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -154,7 +156,7 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        Image image = new Image(ImageIO.read(new File(getClass().getResource("/pdf/llogo.png").getFile())));
+        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -277,7 +279,7 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        Image image = new Image(ImageIO.read(new File(getClass().getResource("/pdf/llogo.png").getFile())));
+        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -311,7 +313,7 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        Image image = new Image(ImageIO.read(new File(getClass().getResource("/pdf/llogo.png").getFile())));
+        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
         // Logo
         float imageWidth = 120;
         float margin = 50;
