@@ -50,7 +50,7 @@ public class ResourceController {
 
     @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.GET)
     public  String sendEmailTest(@PathVariable(value = "id") String id){
-        emailUtil.sendEmail(id,"test email","this is really a DSGVO test");
+        emailUtil.sendEmail(id,"test email","this is really a DSGVO test",CustomerUtil.createDummyCustomer());
 
         return "sent successfully";
     }

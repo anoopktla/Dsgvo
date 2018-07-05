@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,9 +32,15 @@ public class Customer {
     private String bcc;
     private  String toEmail;
 
+    @ElementCollection
+    @CollectionTable(name = "customer_email_address", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "cc_email")
+    private Set<String> ccEmail = new HashSet<>();
 
-
-
+    @ElementCollection
+    @CollectionTable(name = "customer_email_address", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "bcc_email")
+    private Set<String> bccEmail = new HashSet<>();
 
 
     @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
@@ -182,5 +189,21 @@ public class Customer {
 
     public void setToEmail(String toEmail) {
         this.toEmail = toEmail;
+    }
+
+    public Set<String> getCcEmail() {
+        return ccEmail;
+    }
+
+    public void setCcEmail(Set<String> ccEmail) {
+        this.ccEmail = ccEmail;
+    }
+
+    public Set<String> getBccEmail() {
+        return bccEmail;
+    }
+
+    public void setBccEmail(Set<String> bccEmail) {
+        this.bccEmail = bccEmail;
     }
 }

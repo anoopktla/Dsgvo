@@ -13,7 +13,7 @@ public class EmailService {
 
     public void sendEmail(Customer customer){
 
-        emailUtil.sendEmail(customer.getToEmail(),"subject","body");
+        emailUtil.sendEmail(customer.getToEmail(),"subject","body",customer);
 
 
     }
