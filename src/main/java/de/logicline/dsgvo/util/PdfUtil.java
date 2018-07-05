@@ -74,8 +74,10 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
         Locale locale = Locale.ENGLISH;
+        Resource resource = resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"llogo.png");
+        InputStream fileAsInputStream = resource.getInputStream(); // <-- this is the difference
 
-        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
+        Image image = new Image(ImageIO.read(fileAsInputStream));
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -166,7 +168,10 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
+        Resource resource = resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"llogo.png");
+        InputStream fileAsInputStream = resource.getInputStream(); // <-- this is the difference
+
+        Image image = new Image(ImageIO.read(fileAsInputStream));
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -323,7 +328,10 @@ public class PdfUtil {
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
+        Resource resource = resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"llogo.png");
+        InputStream fileAsInputStream = resource.getInputStream(); // <-- this is the difference
+
+        Image image = new Image(ImageIO.read(fileAsInputStream));
         // Logo
         float imageWidth = 120;
         float margin = 50;
