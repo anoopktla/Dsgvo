@@ -21,6 +21,8 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -33,12 +35,20 @@ public class PdfUtil {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 
     public InputStream createPdf(Customer customer) throws Exception {
         try {
+            Resource resource = resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_de.pdf");
+            InputStream fileAsInputStream = resource.getInputStream(); // <-- this is the difference
+            PDDocument document = PDDocument.load(fileAsInputStream);
 
-            PDDocument document = PDDocument.load(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_de.pdf"));
-            PDDocument document2 = PDDocument.load(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_2_de.pdf"));
+
+           resource =  resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"Template_logicline_2_de.pdf");
+           fileAsInputStream =resource.getInputStream();
+           PDDocument document2 = PDDocument.load(fileAsInputStream);
 
             document.addPage(getFirstPage(customer));
             document.addPage(getSecondPage(customer));
