@@ -293,8 +293,12 @@ public class PdfUtil {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
+        Resource resource = resourceLoader.getResource("classpath:pdf"+System.getProperty("file.separator")+"llogo.png");
+        InputStream fileAsInputStream = resource.getInputStream(); // <-- this is the difference
 
-        Image image = new Image(ImageIO.read(ResourceUtils.getFile("classpath:pdf"+System.getProperty("file.separator")+"llogo.png")));
+        Image image = new Image(ImageIO.read(fileAsInputStream));
+
+
         // Logo
         float imageWidth = 120;
         float margin = 50;
@@ -303,19 +307,19 @@ public class PdfUtil {
 
 
         PDStreamUtils.write(contentStream, "Art und Zweck der Datenverarbeitung wie folgt geplant:", PDType1Font.HELVETICA, 8.0f, 50, 741.88f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 720.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 705.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 690.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data ", PDType1Font.HELVETICA, 8.0f, 50, 720.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 705.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 690.0f, Color.BLACK);
         PDStreamUtils.write(contentStream, "Ergänzend wird auf die Leistungsbeschreibung des Hauptvertrags verwiesen.", PDType1Font.HELVETICA, 8.0f, 50, 675.0f, Color.BLACK);
 
         PDStreamUtils.write(contentStream, "Die Datenverarbeitung umfasst die folgenden Arten personenbezogener Daten:", PDType1Font.HELVETICA, 8.0f, 50, 615.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 585.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 570.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 555.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 585.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 570.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 555.0f, Color.BLACK);
         PDStreamUtils.write(contentStream, "Die Verarbeitung umfasst die folgenden Kategorien betroffener Personen:", PDType1Font.HELVETICA, 8.0f, 50, 540.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 525.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 510.0f, Color.BLACK);
-        PDStreamUtils.write(contentStream, "___________________________________________________________________________", PDType1Font.HELVETICA, 8.0f, 50, 495.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 525.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 510.0f, Color.BLACK);
+        PDStreamUtils.write(contentStream, "sample data sample data", PDType1Font.HELVETICA, 8.0f, 50, 495.0f, Color.BLACK);
         PDStreamUtils.write(contentStream, "www.logicline.de", PDType1Font.HELVETICA, 8.0f, 500f, 50f, Color.RED);
         contentStream.close();
 
