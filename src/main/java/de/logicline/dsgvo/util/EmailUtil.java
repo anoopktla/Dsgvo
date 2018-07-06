@@ -46,7 +46,7 @@ public class EmailUtil {
     private String smtpPort;
 
 
-    public void sendEmail(String toEmail, String subject, String body,Customer customer) {
+    public boolean sendEmail(String toEmail, String subject, String body,Customer customer) {
         try {
 
             List lst = new ArrayList<>();
@@ -86,11 +86,13 @@ public class EmailUtil {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 
             Transport.send(message);
+            return  true;
 
 
         } catch (Exception e) {
            System.out.println(e);
         }
+        return false;
     }
 
     private Session getSession() {

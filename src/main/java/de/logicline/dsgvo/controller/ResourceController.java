@@ -13,16 +13,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-@Controller
+@RestController
 public class ResourceController {
-
+//TODO to be removed, this is a sample end point for testing pdf generation, email sending etc
     @Autowired
     PdfUtil pdfUtil;
     @Autowired
@@ -48,10 +46,12 @@ public class ResourceController {
         return response;
     }
 
-    @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.GET)
-    public  String sendEmailTest(@PathVariable(value = "id") String id){
-        emailUtil.sendEmail(id,"test email","this is really a DSGVO test",CustomerUtil.createDummyCustomer());
+    @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.POST)
+    public  String sendTestEmail(@PathVariable(value = "id") String id){
+        if(emailUtil.sendEmail(id,"test email","This is a test email with attachment.",CustomerUtil.createDummyCustomer())){
+            return "sent successfully";
+        }
+      return "error sending email";
 
-        return "sent successfully";
     }
 }
