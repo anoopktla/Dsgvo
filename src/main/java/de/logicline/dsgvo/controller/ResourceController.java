@@ -46,7 +46,7 @@ public class ResourceController {
         return response;
     }
 
-    @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.POST)
+    @RequestMapping(value = "/mail/{id:.+}",method = RequestMethod.GET)
     public  String sendTestEmail(@PathVariable(value = "id") String id){
         if(emailUtil.sendEmail(id,"test email","This is a test email with attachment.",CustomerUtil.createDummyCustomer())){
             return "sent successfully";
