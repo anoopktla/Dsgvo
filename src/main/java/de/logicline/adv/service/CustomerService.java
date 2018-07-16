@@ -1,9 +1,12 @@
 package de.logicline.adv.service;
 
+import de.logicline.adv.controller.TestController;
 import de.logicline.adv.dao.CustomerRepository;
 import de.logicline.adv.model.Customer;
 import de.logicline.adv.util.PdfUtil;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ public class CustomerService {
 
     @Autowired
     PdfUtil pdfUtil;
+    private  static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
     public Customer addOrModifyCustomer(Customer customer){
 
@@ -30,7 +34,7 @@ public class CustomerService {
         }
 
         catch (Exception e){
-            e.printStackTrace();
+            LOGGER.error("error saving customer details and adv",e);
 
         }
 

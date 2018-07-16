@@ -12,7 +12,13 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -31,12 +37,10 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/my-app/");
+        resolver.setPrefix("/WEB-INF/adv-web/dist/ngMat/");
         resolver.setSuffix(".html");
         return resolver;
     }
-
-
 
     @Override
     public void configureDefaultServletHandling(
@@ -44,28 +48,32 @@ public class MvcConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-   /* @Override
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resource/**").addResourceLocations("WEB-INF/resources/");
+        //if we need more static content, add the path and extension here.
+        registry
+                .addResourceHandler("*.js", "*.css")
+                .addResourceLocations("/WEB-INF/adv-web/dist/ngMat/");
+
+
     }
-*/
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
 
-        List<MediaType> supportedApplicationTypes = new ArrayList<MediaType>();
+        List<MediaType> supportedApplicationTypes = new ArrayList<>();
         supportedApplicationTypes.add(MediaType.APPLICATION_PDF);
         ByteArrayHttpMessageConverter byteArrayHttpMessageConverter = new ByteArrayHttpMessageConverter();
         byteArrayHttpMessageConverter.setSupportedMediaTypes(supportedApplicationTypes);
         converters.add(byteArrayHttpMessageConverter);
 
     }
-    /*
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
-*/
+
     //to set the default locale
     @Bean
     public LocaleResolver localeResolver() {
@@ -81,7 +89,7 @@ public class MvcConfig implements WebMvcConfigurer {
         return lci;
     }
 
-    //To register the interceptor
+    //To register the locale change interceptor
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
@@ -89,6 +97,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     public MessageSource messageSource() {
+        //118n resource bundle locations
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("messages/messages", "Messages/Labels");
         messageSource.setDefaultEncoding("UTF-8");

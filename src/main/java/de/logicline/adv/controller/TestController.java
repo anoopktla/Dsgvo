@@ -23,7 +23,7 @@ import java.io.InputStream;
 @RestController
 @RequestMapping("/adv-service/v1/test")
 public class TestController {
-    //TODO to be removed, this is a sample end point for testing pdf generation, email sending etc
+    //TODO to be removed ?, this is a sample end point for testing pdf generation, email sending etc
     @Autowired
     PdfUtil pdfUtil;
     @Autowired

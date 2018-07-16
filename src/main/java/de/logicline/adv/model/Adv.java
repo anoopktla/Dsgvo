@@ -23,6 +23,17 @@ public class Adv {
     private Long customerId;
     private String purposeOfCollection;
     private String categoryOfDataSubjects;
+
+    private String physicalAccessControl;
+    private String logicalAccessControl;
+    private String dataAccessControl;
+    private String dataTransferControl;
+    private String dataEntryControl;
+    private String controlOfProcessingInstructions;
+    private String availablityControl;
+    private String separationControl;
+
+    private  boolean isPermanent;
     private Date validFrom;
     private Date validTo;
 
@@ -67,6 +78,70 @@ public class Adv {
         this.categoryOfDataSubjects = categoryOfDataSubjects;
     }
 
+    public String getPhysicalAccessControl() {
+        return physicalAccessControl;
+    }
+
+    public void setPhysicalAccessControl(String physicalAccessControl) {
+        this.physicalAccessControl = physicalAccessControl;
+    }
+
+    public String getLogicalAccessControl() {
+        return logicalAccessControl;
+    }
+
+    public void setLogicalAccessControl(String logicalAccessControl) {
+        this.logicalAccessControl = logicalAccessControl;
+    }
+
+    public String getDataAccessControl() {
+        return dataAccessControl;
+    }
+
+    public void setDataAccessControl(String dataAccessControl) {
+        this.dataAccessControl = dataAccessControl;
+    }
+
+    public String getDataTransferControl() {
+        return dataTransferControl;
+    }
+
+    public void setDataTransferControl(String dataTransferControl) {
+        this.dataTransferControl = dataTransferControl;
+    }
+
+    public String getDataEntryControl() {
+        return dataEntryControl;
+    }
+
+    public void setDataEntryControl(String dataEntryControl) {
+        this.dataEntryControl = dataEntryControl;
+    }
+
+    public String getControlOfProcessingInstructions() {
+        return controlOfProcessingInstructions;
+    }
+
+    public void setControlOfProcessingInstructions(String controlOfProcessingInstructions) {
+        this.controlOfProcessingInstructions = controlOfProcessingInstructions;
+    }
+
+    public String getAvailablityControl() {
+        return availablityControl;
+    }
+
+    public void setAvailablityControl(String availablityControl) {
+        this.availablityControl = availablityControl;
+    }
+
+    public String getSeparationControl() {
+        return separationControl;
+    }
+
+    public void setSeparationControl(String separationControl) {
+        this.separationControl = separationControl;
+    }
+
     public Date getValidFrom() {
         return validFrom;
     }
@@ -91,7 +166,14 @@ public class Adv {
         this.advInPdfFormat = advInPdfFormat;
     }
 
-   /* public Set<String> getTom() {
+    public boolean isPermanent() {
+        return isPermanent;
+    }
+
+    public void setPermanent(boolean permanent) {
+        isPermanent = permanent;
+    }
+/* public Set<String> getTom() {
         return tom;
     }
 

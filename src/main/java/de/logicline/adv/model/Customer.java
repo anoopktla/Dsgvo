@@ -30,13 +30,15 @@ public class Customer {
     private String position;
     private String emailAddress;
     private int phoneNumber;
-    private String address;
+    private String companyName;
     private String street;
     private int buildingNumber;
     private String addressLine2;
     private String zipCode;
     private String city;
     private String country;
+
+
     private String cc;
     private String bcc;
     private String toEmail;
@@ -136,14 +138,13 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
-
 
     public String getLastName() {
         return lastName;
