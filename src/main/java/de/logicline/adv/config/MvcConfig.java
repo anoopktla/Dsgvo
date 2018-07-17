@@ -64,13 +64,16 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+
+        /*converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
 
         List<MediaType> supportedApplicationTypes = new ArrayList<>();
         supportedApplicationTypes.add(MediaType.APPLICATION_PDF);
+        supportedApplicationTypes.add(MediaType.APPLICATION_OCTET_STREAM);
+
         ByteArrayHttpMessageConverter byteArrayHttpMessageConverter = new ByteArrayHttpMessageConverter();
         byteArrayHttpMessageConverter.setSupportedMediaTypes(supportedApplicationTypes);
-        converters.add(byteArrayHttpMessageConverter);
+        converters.add(byteArrayHttpMessageConverter);*/
 
     }
 

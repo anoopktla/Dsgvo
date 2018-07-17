@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.InputStream;
 
-@RestController
+@Controller
 @RequestMapping("/adv-service/v1/test")
 public class TestController {
     //TODO to be removed ?, this is a sample end point for testing pdf generation, email sending etc
@@ -36,7 +37,7 @@ public class TestController {
         Customer customer = CustomerUtil.createDummyCustomer();
         InputStream in = pdfUtil.createPdf(customer);
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        headers.setContentType(MediaType.APPLICATION_PDF);
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT");
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, HttpHeaders.CONTENT_TYPE);
@@ -54,17 +55,29 @@ public class TestController {
 
     @RequestMapping(value = "/mail/{id:.+}", method = RequestMethod.GET)
     @ResponseBody
-    public String sendTestEmail(@PathVariable(value = "id") String id) {
+    public ResponseEntity<String> sendTestEmail(@PathVariable(value = "id") String id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT");
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, HttpHeaders.CONTENT_TYPE);
+        headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+        headers.add(HttpHeaders.PRAGMA, "no-cache");
+        headers.add(HttpHeaders.EXPIRES, "0");
 
+        String message;
 
         if (emailUtil.sendEmail(id, "test email", "This is a test email with attachment.", CustomerUtil.createDummyCustomer())) {
-            LOGGER.info("successfully  sent  email to {}",id);
-            return "Email sent successfully to " + id;
+            message = "Email sent successfully to " + id;
+            LOGGER.info(message);
+
         }
-
-        LOGGER.error("Error sending email to {}",id);
-        return "error sending email to " + id;
-
+        else {
+            message ="Error sending email to "+id;
+            LOGGER.error(message);
+        }
+        return new ResponseEntity<>(
+                message, headers, HttpStatus.OK);
     }
 
 
