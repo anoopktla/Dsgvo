@@ -99,7 +99,7 @@ public class EmailUtil {
                 message.setSentDate(new Date());
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
                 Transport.send(message);
-                LOGGER.error("successfully  sent email to {}",toEmail);
+                LOGGER.info("successfully  sent email to {}",toEmail);
                 return true;
 
 
