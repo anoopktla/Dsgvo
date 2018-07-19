@@ -4,4 +4,13 @@
   border: solid 1px;
   margin: 10px;
   cursor: pointer;
+  text-align: center;
+  min-width: 20rem;
+}
+.home-icon-container{
+  height: 100vh
+}
+
+.privacy-container{
+  padding: 10px;
 }

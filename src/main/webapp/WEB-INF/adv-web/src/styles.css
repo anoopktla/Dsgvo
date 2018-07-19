@@ -21,3 +21,6 @@
   .privacy-container{
     padding: 10px;
   }
+  .contract-tom .form-check{
+    min-width: 256px;
+  }

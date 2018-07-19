@@ -10,6 +10,7 @@ export class SecondPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  
   }
 
 }

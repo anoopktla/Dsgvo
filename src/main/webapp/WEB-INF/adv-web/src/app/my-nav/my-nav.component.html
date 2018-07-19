@@ -1,16 +1,14 @@
-
 <mat-tab-group [selectedIndex]="selectedTab">
   <mat-tab label="Privacy Policy">
     <form [formGroup]="privacyForm">
-      <div class="privacy-container">
-      <mat-checkbox formControlName="checkboxOne">I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
-        point I can cancel that subscription through email or through clicking the unsubscribe link at the end of each news
-        letter </mat-checkbox>
-      <mat-checkbox formControlName="checkboxTwo">I have read the references to data security and accept them </mat-checkbox>
-      <div class="button-row">
-        
-        <button mat-raised-button color="warn" [disabled]="privacyForm.invalid"  (click)="changeTabIndex(1)">Save & Next</button>
-      </div>
+      <div class="privacy-container ">
+        <mat-checkbox formControlName="checkboxOne"> I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
+          point I can cancel that subscription through email or through clicking the unsubscribe link at the end of each
+          news letter </mat-checkbox>
+        <mat-checkbox formControlName="checkboxTwo">I have read the references to data security and accept them </mat-checkbox>
+        <div class="button-row">
+          <button mat-raised-button color="warn" [disabled]="privacyForm.invalid" (click)="changeTabIndex(1)">Save & Next</button>
+        </div>
       </div>
     </form>
   </mat-tab>
@@ -18,18 +16,24 @@
     <form [formGroup]="companyForm">
       <mat-form-field>
         <mat-label>Comapany</mat-label>
-        <input matInput formControlName="companyName" required> </mat-form-field>
+        <input matInput formControlName="companyName" required>
+        <mat-error *ngIf="!companyForm.controls['companyName'].required"> This field is mandatory.Please provide a value! </mat-error>
+      </mat-form-field>
       <table class="fill-width">
         <tr>
           <td>
             <mat-form-field class="fill-width">
               <mat-label>Street</mat-label>
-              <input matInput formControlName="street" required> </mat-form-field>
+              <input matInput formControlName="street" required>
+              <mat-error *ngIf="!companyForm.controls['street'].required"> This field is mandatory.Please provide a value! </mat-error>
+            </mat-form-field>
           </td>
           <td>
             <mat-form-field class="fill-width">
               <mat-label>No</mat-label>
-              <input matInput formControlName="no" required> </mat-form-field>
+              <input matInput formControlName="no" required>
+              <mat-error *ngIf="!companyForm.controls['no'].required"> This field is mandatory.Please provide a value! </mat-error>
+            </mat-form-field>
           </td>
           <td>
             <mat-form-field class="fill-width">
@@ -43,18 +47,23 @@
           <td>
             <mat-form-field class="fill-width">
               <mat-label>ZIP Code</mat-label>
-              <input matInput required formControlName="zip"> </mat-form-field>
+              <input matInput required formControlName="zip">
+              <mat-error *ngIf="!companyForm.controls['zip'].required"> This field is mandatory.Please provide a value! </mat-error>
+            </mat-form-field>
           </td>
           <td>
             <mat-form-field class="fill-width">
               <mat-label>City</mat-label>
-              <input matInput required formControlName="city"> </mat-form-field>
+              <input matInput required formControlName="city">
+              <mat-error *ngIf="!companyForm.controls['city'].required"> This field is mandatory.Please provide a value! </mat-error>
+            </mat-form-field>
           </td>
           <td>
             <mat-form-field class="fill-width">
               <mat-select placeholder="Country" required formControlName="country">
                 <mat-option *ngFor="let country of countries" [value]="country.value"> {{ country.value }} </mat-option>
               </mat-select>
+              <mat-error *ngIf="!companyForm.controls['country'].required"> This field is mandatory.Please provide a value! </mat-error>
             </mat-form-field>
           </td>
         </tr>
@@ -72,169 +81,408 @@
           <mat-select placeholder="Salution" required formControlName="salutation">
             <mat-option *ngFor="let salutation of salutations" [value]="salutation.value"> {{ salutation.value }} </mat-option>
           </mat-select>
+          <mat-error *ngIf="!contactForm.controls['salutation'].required"> This field is mandatory.Please provide a value! </mat-error>
         </mat-form-field>
         <mat-form-field class="fill-width">
           <mat-label>First Name</mat-label>
-          <input matInput required formControlName="firstName"> </mat-form-field>
+          <input matInput required formControlName="firstName">
+          <mat-error *ngIf="!contactForm.controls['firstName'].required"> This field is mandatory.Please provide a value! </mat-error>
+        </mat-form-field>
         <mat-form-field class="fill-width">
           <mat-label>Last Name</mat-label>
-          <input matInput required formControlName="lastName"> </mat-form-field>
+          <input matInput required formControlName="lastName">
+          <mat-error *ngIf="!contactForm.controls['lastName'].required"> This field is mandatory.Please provide a value! </mat-error>
+        </mat-form-field>
       </div>
       <mat-form-field>
         <mat-label>Position</mat-label>
-        <input matInput> </mat-form-field>
+        <input matInput formControlName="position"> </mat-form-field>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput required formControlName="email"> </mat-form-field>
+        <input matInput required formControlName="email">
+        <mat-error *ngIf="contactForm.controls['email'].errors?.required"> This field is mandatory.Please provide a value! </mat-error>
+        <mat-error *ngIf="contactForm.controls['email'].errors?.email">Invalid email</mat-error>
+      </mat-form-field>
       <mat-form-field>
         <mat-label>Phone</mat-label>
-        <input matInput required formControlName="phone"> </mat-form-field>
+        <input matInput required formControlName="phone">
+        <mat-error *ngIf="!contactForm.controls['phone'].required"> This field is mandatory.Please provide a value! </mat-error>
+      </mat-form-field>
       <div class="button-row">
-        <button mat-raised-button color="warn" type="button" (click)="changeTabIndex(1)">Previous</button>
+        <button mat-raised-button color="warn" class="m-2" type="button" (click)="changeTabIndex(1)">Previous</button>
         <button mat-raised-button color="warn" [disabled]="contactForm.invalid" (click)="changeTabIndex(3)">Save & Next</button>
       </div>
     </form>
   </mat-tab>
   <mat-tab label="Contract Details">
-    <form>
+    <form [formGroup]="contractCategoryForm">
       <div class="card-body">
-        <div class="contract-details col-12">
-          <h5 class="card-title">Contract Details</h5>
-          <div class="form-row">
-            <div class="form-group col-md-3">
-              <label for="categotyData">Category of data</label>
-              <input type="text" class="form-control"> </div>
-            <div class="form-group col-md-3">
-              <label for="collectionPurpose">Purpose of collection,processing or use of data</label>
-              <input type="text" class="form-control"> </div>
-            <div class="form-group col-md-4">
-              <label for="position">Category of data subjects the date relates to</label>
-              <input type="text" class="form-control"> </div>
-            <div class="col-md-2">
-              <div style="margin-top :38px">
-                <i class="fa fa-plus-circle"></i> add </div>
+        <h5 class="card-title">Contract Details</h5>
+        <div formArrayName="categoryDetails">
+          <div *ngFor="let itemrow of contractCategoryForm.controls.categoryDetails.controls; let i=index" [formGroupName]="i">
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="categotyData">Category of data</label>
+                <textarea class="form-control" formControlName="categoryOfData" rows="2"></textarea> </div>
+              <div class="form-group col-md-3">
+                <label for="collectionPurpose">Purpose of collection,processing or use of data</label>
+                <textarea class="form-control" formControlName="purposeOfCollection" rows="2"></textarea> </div>
+              <div class="form-group col-md-4">
+                <label for="position">Category of data subjects the date relates to</label>
+                <textarea class="form-control" rows="2" formControlName="categoryOfSubjects"></textarea> </div>
+              <div class="col-md-2">
+                <div style="margin-top :38px">
+                  <div>
+                    <i class="fa fa-plus-circle contract-add" (click)="addNewRow()"></i> add </div>
+                  <div *ngIf="contractCategoryForm.controls.categoryDetails.controls.length > 1">
+                    <i class="fa fa-minus-circle contract-add" (click)="deleteRow()"></i> remove </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-12 row">
-          <div class="technical-measures col-7">
+        <div class="col-12  contract-tom row">
+          <div class="col-7">
             <p class="card-title">Technical and organisational measures (TOM)</p>
-            <div class="form-group row">
+            <div class="form-group row" >
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isPhysicalAccess">
                 <label class="col-form-label">physical access control</label>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="physicalAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isLogicalAccess">
                 <label class="col-form-label">logical access control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control"   formControlName="logicalAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isDataAccess">
                 <label class="col-form-label">data access control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control"  formControlName="dataAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isDataTransfer">
                 <label class="col-form-label">data transfer control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="dataTransferControl"> </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row ">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isDataEntry">
                 <label class="col-form-label">data entry control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="dataEntryControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isControlOfProcessing">
                 <label class="col-form-label">control of processing Instructions</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="controlOfProcessing"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
+                <input type="checkbox" class="form-check-input" formControlName="isAvailability">
                 <label class="col-form-label">availability control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="availabilityControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input">
-                <label class="col-form-label">separation control</label>
+                <input type="checkbox" class="form-check-input" formControlName="isSeperation">
+                <label class="col-form-label">seperation control</label>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control"> </div>
+                <input type="text" class="form-control" formControlName="seperationControl"> </div>
             </div>
           </div>
           <div class="col-4">
             <p class="card-title">Validity</p>
             <div class="row">
               <mat-form-field>
-                <input matInput [matDatepicker]="validFrom" placeholder="Valid from">
+                <input matInput [matDatepicker]="validFrom" [max]="startDate" placeholder="Valid from" formControlName="vaidFrom">
                 <mat-datepicker-toggle matSuffix [for]="validFrom"></mat-datepicker-toggle>
-                <mat-datepicker #validFrom></mat-datepicker>
+                <mat-datepicker #validFrom [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field>
-                <input matInput [matDatepicker]="validTo" placeholder="Valid To">
+                <input matInput [matDatepicker]="validTo" [min]="startDate" placeholder="Valid To" formControlName="vaidTo">
                 <mat-datepicker-toggle matSuffix [for]="validTo"></mat-datepicker-toggle>
                 <mat-datepicker #validTo></mat-datepicker>
               </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-checkbox formControlName="permanent">permanent </mat-checkbox>
             </div>
           </div>
         </div>
       </div>
     </form>
     <div class="button-row">
-      <button mat-raised-button color="warn" type="button" (click)="changeTabIndex(2)">Previous</button>
+      <button mat-raised-button color="warn" class="m-2" type="button" (click)="changeTabIndex(2)">Previous</button>
       <button mat-raised-button color="warn" (click)="changeTabIndex(4)">Save & Next</button>
     </div>
   </mat-tab>
   <mat-tab label="Email Details">
     <div class="container-fluid">
-      <form>
+      <form  [formGroup]="emailInfoForm">
         <div class="col-12">
           <mat-form-field>
-            <mat-select placeholder="Email Templates">
+            <mat-select placeholder="Email Templates" formControlName="emailTemplate">
               <mat-option *ngFor="let template of emailTemplates" [value]="template.value"> {{ template.value }} </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="col-12">
           <mat-form-field>
-            <mat-label>CC</mat-label>
-            <input matInput> </mat-form-field>
+            <mat-label >CC</mat-label>
+            <input matInput formControlName="cc"> 
+            <mat-error *ngIf="emailInfoForm.controls['cc'].errors?.email">invalid Mail</mat-error>
+          </mat-form-field>
           <mat-form-field>
-            <mat-label>CC</mat-label>
-            <input matInput> </mat-form-field>
+            <mat-label>bcc</mat-label>
+            <input matInput  formControlName="bcc">
+            <mat-error *ngIf="emailInfoForm.controls['bcc'].errors?.email">invalid Mail</mat-error>
+          </mat-form-field>
         </div>
         <div class="button-row">
-          <button mat-raised-button color="warn" type="button" (click)="changeTabIndex(3)" >Previous</button>
-          <button mat-raised-button color="warn" (click)="changeTabIndex(5)">Generate preview</button>
+          <button mat-raised-button color="warn" class="m-2" type="button" (click)="changeTabIndex(3)">Previous</button>
+          <button mat-raised-button color="warn" [disabled]="emailInfoForm.invalid" (click)="generatePreview()" >Generate preview</button>
         </div>
       </form>
     </div>
   </mat-tab>
   <mat-tab label="Preview">
-    
+    <form class="col-12">
+      <h6 class="card-title">Contract Details</h6>
+      <div class="privacy-container">
+        <mat-checkbox>I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
+          point I can cancel that subscription through email or through clicking the unsubscribe link at the end of each
+          news letter </mat-checkbox>
+        <mat-checkbox>I have read the references to data security and accept them </mat-checkbox>
+      </div>
+    </form>
+    <form class="col-12">
+      <h6 class="card-title">Company information</h6>
+      <div class="form-group row">
+        <label class="col-3">Company</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.companyName}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Street</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">No</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Address Line 2</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.address}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Zip Code</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.zip}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">City</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.city}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Country</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.country}}</div>
+        </div>
+      </div>
+    </form>
+    <form class="col-12">
+      <h6 class="card-title">Contact Person</h6>
+      <div class="form-group row">
+        <label class="col-3">Salution</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.salutation}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">First Name</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.firstName}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Last Name</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.lastName}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Position</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.position}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Email</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.email}}</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">Phone</label>
+        <div class="col-5">
+          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.phone}}</div>
+        </div>
+      </div>
+    </form>
+    <form>
+      <div class="contract-details col-12">
+        <h6 class="card-title">Contract Details</h6>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="categotyData">Category of data</label>
+            <input type="text" class="form-control"> </div>
+          <div class="form-group col-md-3">
+            <label for="collectionPurpose">Purpose of collection,processing or use of data</label>
+            <input type="text" class="form-control"> </div>
+          <div class="form-group col-md-4">
+            <label for="position">Category of data subjects the date relates to</label>
+            <input type="text" class="form-control"> </div>
+        </div>
+      </div>
+      <div class="col-12 contract-tom  row">
+        <div class="technical-measures col-7">
+          <p class="card-title">Technical and organisational measures (TOM)</p>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">physical access control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">logical access control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">data access control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">data transfer control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row ">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">data entry control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">control of processing Instructions</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">availability control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+          <div class="form-group row">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="col-form-label">seperation control</label>
+            </div>
+            <div class="col-md-6">
+              <input type="password" class="form-control"> </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <p class="card-title">Validity</p>
+          <div class="row">
+            <mat-form-field>
+              <input matInput> </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field>
+              <input matInput> </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-checkbox>permanent </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form class="col-12">
+      <h6 class="card-title">Email Details</h6>
+      <div class="form-group row">
+        <label class="col-3">Email Templates</label>
+        <div class="col-5">
+          <div class="preview-info">Template 1</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">CC</label>
+        <div class="col-5">
+          <div class="preview-info">jobin.joy@logicline.de</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-3">bcc</label>
+        <div class="col-5">
+          <div class="preview-info">anoop.logicline.de</div>
+        </div>
+      </div>
+    </form>
+    <div class="button-row">
+      <button mat-raised-button color="warn" class="m-2" type="button" (click)="changeTabIndex(4)">Edit Details</button>
+      <button mat-raised-button color="warn" (click)="createAdv()">Generate pdf</button>
+    </div>
   </mat-tab>
 </mat-tab-group>
