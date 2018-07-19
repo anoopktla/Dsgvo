@@ -34,8 +34,8 @@ public class ResourceService {
     @PostConstruct
     public void init() throws IOException {
         Resource resource = resourceLoader.getResource(PATH_PREFIX + FILE_SEPARATOR + FILE_NAME );
-        File jsonFile = resource.getFile();
-        countryList = objectMapper.readValue(jsonFile, new TypeReference<List<Country>>() {});
+        InputStream fileAsInputStream = resource.getInputStream();
+        countryList = objectMapper.readValue(fileAsInputStream, new TypeReference<List<Country>>() {});
     }
 
     public List<Country> getCountryList() {
