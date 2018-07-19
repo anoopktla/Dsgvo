@@ -44,7 +44,6 @@ public class OrikaConfig {
 
         mapperFactory.classMap(ContractInfo.class, AdvDao.class)
                 .field("dataCategories","dataCategoryDao")
-
                 .byDefault()
                 .register();
 

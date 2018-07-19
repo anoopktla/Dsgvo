@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -30,40 +30,54 @@ public class CustomerService {
     @Autowired
     MapperFacade mapperFacade;
 
-    private  static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
-    public Customer addOrModifyCustomer(Customer customer){
-        //This is done because the front-end team requested a different model structure and Orika takes care
-        // of mapping back & forth conversions
-        CustomerDao customerDao = mapperFacade.map(customer,CustomerDao.class);
+    public Customer addOrModifyCustomer(Customer customer) {
+        boolean  isUpdate = false;
+
 
         try {
+            /*This is done because the front-end team requested a different model structure and Orika takes care
+             of mapping back & forth conversions*/
+            CustomerDao customerDaoToBeSaved = mapperFacade.map(customer, CustomerDao.class);
 
             //TODO for phase 1, we don't have user login feature, so just taking first adv from list to create pdf
-
-            byte[] pdfInByteFormat = IOUtils.toByteArray(pdfUtil.createPdf(customerDao));
-            if (pdfInByteFormat.length == 0){
+            byte[] pdfInByteFormat = IOUtils.toByteArray(pdfUtil.createPdf(customerDaoToBeSaved));
+            if (pdfInByteFormat.length == 0) {
                 LOGGER.error("error while rendering adv in pdf format");
                 return null;
-
-
             }
 
-            emailService.sendEmail(customerDao);
+            CustomerDao customerFromDb = customerRepository.findCustomerByEmailId(customerDaoToBeSaved.getEmailAddress());
+            if(customerFromDb != null){
+                List<AdvDao> advDaoList = customerFromDb.getAdvDao();
+                AdvDao newAdvDao = customerDaoToBeSaved.getAdvDao().get(0);
+                newAdvDao.setAdvInPdfFormat(pdfInByteFormat);
+                advDaoList.add(newAdvDao);
+                isUpdate = true;
+            }
+
+            if (isUpdate) {
+                emailService.sendEmail(customerFromDb);
+                return mapperFacade.map(customerRepository.save(customerFromDb), Customer.class);
+
+
+            } else {
+                customerDaoToBeSaved.getAdvDao().get(0).setAdvInPdfFormat(pdfInByteFormat);
+                emailService.sendEmail(customerDaoToBeSaved);
+                return mapperFacade.map(customerRepository.save(customerDaoToBeSaved), Customer.class);
+            }
+        } catch (Exception e) {
+            LOGGER.error("error while processing customer details and adv", e);
 
         }
 
-        catch (Exception e){
-            LOGGER.error("error while processing customer details and adv",e);
-
-        }
-
-        return mapperFacade.map(customerRepository.save(customerDao),Customer.class);
+        return null;
     }
 
-    public  Iterable<Customer> getAllCustomers(){
+    public Iterable<Customer> getAllCustomers() {
 
 
-        return mapperFacade.mapAsList(customerRepository.findAll(),Customer.class);
+        return mapperFacade.mapAsList(customerRepository.findAll(), Customer.class);
     }
 }

@@ -3,9 +3,7 @@ package de.logicline.adv.model.dao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,9 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "ADV")
@@ -37,7 +33,7 @@ public class AdvDao {
     private String dataAccessControl;
     private String dataTransferControl;
     private String dataEntryControl;
-    private String controlOfProcessingInstructions;
+    private String controlOfProcessing;
     private String availablityControl;
     private String separationControl;
 
@@ -123,12 +119,12 @@ public class AdvDao {
         this.dataEntryControl = dataEntryControl;
     }
 
-    public String getControlOfProcessingInstructions() {
-        return controlOfProcessingInstructions;
+    public String getControlOfProcessing() {
+        return controlOfProcessing;
     }
 
-    public void setControlOfProcessingInstructions(String controlOfProcessingInstructions) {
-        this.controlOfProcessingInstructions = controlOfProcessingInstructions;
+    public void setControlOfProcessing(String controlOfProcessing) {
+        this.controlOfProcessing = controlOfProcessing;
     }
 
     public String getAvailablityControl() {

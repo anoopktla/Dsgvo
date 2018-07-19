@@ -77,10 +77,6 @@ public class EmailUtil {
         if (validateEmail(toEmail)) {
 
             try {
-                List advs = new ArrayList<>();
-                advs.add(new AdvDao());
-                customerDao.setAdvDao(advs);
-                customerDao.getAdvDao().get(0).setAdvInPdfFormat(IOUtils.toByteArray(pdfUtil.createPdf(customerDao)));
                 ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(customerDao.getAdvDao().get(0).getAdvInPdfFormat(), MediaType.APPLICATION_PDF_VALUE);
                 Message message = new MimeMessage(getSession());
                 Multipart multipart = new MimeMultipart();

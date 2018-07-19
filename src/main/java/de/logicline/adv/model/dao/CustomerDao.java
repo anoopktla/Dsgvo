@@ -41,7 +41,7 @@ public class CustomerDao {
 
     private String cc;
     private String bcc;
-    private String toEmail;
+
 
     @ElementCollection
     @CollectionTable(name = "customer_email_address", joinColumns = @JoinColumn(name = "id"))
@@ -192,14 +192,6 @@ public class CustomerDao {
 
     public void setBcc(String bcc) {
         this.bcc = bcc;
-    }
-
-    public String getToEmail() {
-        return toEmail;
-    }
-
-    public void setToEmail(String toEmail) {
-        this.toEmail = toEmail;
     }
 
     public Set<String> getCcEmail() {

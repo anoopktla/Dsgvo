@@ -17,6 +17,9 @@ public interface CustomerRepository extends PagingAndSortingRepository<CustomerD
     @Query("SELECT c.firstName FROM CustomerDao c where c.id = :id")
     CustomerDao findCustomerById(@Param("id") Long id);
 
+    @Query("SELECT c FROM CustomerDao c where c.emailAddress = :emailId")
+    CustomerDao findCustomerByEmailId(@Param("emailId") String emailId);
+
 
 
 
