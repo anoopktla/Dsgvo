@@ -1,28 +1,34 @@
 package de.logicline.adv.util;
 
-import de.logicline.adv.model.Adv;
-import de.logicline.adv.model.Customer;
+import de.logicline.adv.model.dao.AdvDao;
+import de.logicline.adv.model.dao.CustomerDao;
 import org.apache.commons.io.IOUtils;
+import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.activation.DataHandler;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 public class EmailUtil {
-    private static final String CONTENT_TYPE_STRING = "Content-type";
     private static final String CONTENT_TYPE = "text/HTML; charset=UTF-8";
-    private  static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);
+    private static final String PDF_FILE_NAME = "adv.pdf";
 
     @Autowired
     PdfUtil pdfUtil;
@@ -45,59 +51,66 @@ public class EmailUtil {
     @Value("${mail.smtp.port}")
     private String smtpPort;
 
+    private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+    private static Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+    private Matcher matcher;
 
-    public boolean sendEmail(String toEmail, String subject, String body,Customer customer) {
+
+    public boolean validateEmail(String email) {
+        boolean isValid = false;
+
         try {
-
-            List lst = new ArrayList<>();
-            lst.add(new Adv());
-            customer.setAdv(lst);
-            customer.getAdv().get(0).setAdvInPdfFormat(IOUtils.toByteArray(pdfUtil.createPdf(customer)));
-            ByteArrayDataSource bds = new ByteArrayDataSource(customer.getAdv().get(0).getAdvInPdfFormat(), "application/pdf");
-           String html="<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-                   "<!-- saved from url=(0050)https://epay.kwa.kerala.gov.in/paymentResponse.php -->\n" +
-                   "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>\n" +
-                   "\n" +
-                   "Sample html to test email\n" +
-                   "</body></html>";
-            Message message  = new MimeMessage(getSession());
-            Multipart multipart = new MimeMultipart();
-
-            MimeBodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setContent(html,CONTENT_TYPE);
-            MimeBodyPart attachPart = new MimeBodyPart();
-
-            attachPart.setDataHandler(new DataHandler(bds));
-            attachPart.setFileName("adv.pdf");
-            multipart.addBodyPart(messageBodyPart);
-            multipart.addBodyPart(attachPart);
-
-
-// sets the multipart as message's content
-            message.setContent(multipart);
-            //set message headers
-
-
-            message.setFrom(new InternetAddress(emailUserName, "NoReply-JD"));
-
-            message.setReplyTo(InternetAddress.parse(emailUserName, false));
-
-            message.setSubject(subject);
-
-
-
-            message.setSentDate(new Date());
-
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-
-            Transport.send(message);
-
-            return  true;
-
-
+            if(!StringUtils.isEmpty(email)){
+                matcher = pattern.matcher(email);
+                isValid = matcher.matches();
+            }
         } catch (Exception e) {
-            LOGGER.error("error sending email ",e);
+            LOGGER.error("error while validating the given email address {}", email , e);
+
         }
+        return isValid;
+    }
+
+
+    public boolean sendEmail(String toEmail, String subject, String body, CustomerDao customerDao) {
+
+        if (validateEmail(toEmail)) {
+
+            try {
+                List advs = new ArrayList<>();
+                advs.add(new AdvDao());
+                customerDao.setAdvDao(advs);
+                customerDao.getAdvDao().get(0).setAdvInPdfFormat(IOUtils.toByteArray(pdfUtil.createPdf(customerDao)));
+                ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(customerDao.getAdvDao().get(0).getAdvInPdfFormat(), MediaType.APPLICATION_PDF_VALUE);
+                Message message = new MimeMessage(getSession());
+                Multipart multipart = new MimeMultipart();
+
+                MimeBodyPart messageBodyPart = new MimeBodyPart();
+                messageBodyPart.setContent(body, CONTENT_TYPE);
+                MimeBodyPart messageAttachmentPart = new MimeBodyPart();
+
+                messageAttachmentPart.setDataHandler(new DataHandler(byteArrayDataSource));
+                messageAttachmentPart.setFileName(PDF_FILE_NAME);
+                multipart.addBodyPart(messageBodyPart);
+                multipart.addBodyPart(messageAttachmentPart);
+
+                message.setContent(multipart);
+
+
+                message.setFrom(new InternetAddress(emailUserName, "Helpdesk Logicline"));
+                message.setReplyTo(InternetAddress.parse(emailUserName, false));
+                message.setSubject(subject);
+                message.setSentDate(new Date());
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+                Transport.send(message);
+                return true;
+
+
+            } catch (Exception e) {
+                LOGGER.error("error sending email ", e);
+            }
+        }
+        LOGGER.error("error sending email as the provided address {} is invalid ", toEmail);
         return false;
     }
 

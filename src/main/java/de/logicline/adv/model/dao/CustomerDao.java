@@ -1,4 +1,4 @@
-package de.logicline.adv.model;
+package de.logicline.adv.model.dao;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer {
+public class CustomerDao {
     //TODO fields & types need to be revisited once we have a front end
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -56,7 +56,7 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "customerId")
-    private List<Adv> adv;
+    private List<AdvDao> advDao;
 
     public String getStreet() {
         return street;
@@ -106,12 +106,12 @@ public class Customer {
         this.country = country;
     }
 
-    public List<Adv> getAdv() {
-        return adv;
+    public List<AdvDao> getAdvDao() {
+        return advDao;
     }
 
-    public void setAdv(List<Adv> adv) {
-        this.adv = adv;
+    public void setAdvDao(List<AdvDao> advDao) {
+        this.advDao = advDao;
     }
 
     public Long getId() {

@@ -1,18 +1,27 @@
-package de.logicline.adv.model;
+package de.logicline.adv.model.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ADV")
-public class Adv {
+public class AdvDao {
 
     @Id
     @Column(unique = true, nullable = false)
@@ -21,8 +30,7 @@ public class Adv {
 
 
     private Long customerId;
-    private String purposeOfCollection;
-    private String categoryOfDataSubjects;
+
 
     private String physicalAccessControl;
     private String logicalAccessControl;
@@ -34,16 +42,29 @@ public class Adv {
     private String separationControl;
 
     private  boolean isPermanent;
+    private boolean isPhysicalAccess;
+    private boolean isLogicalAccess;
+    private boolean isDataAccess;
+    private boolean isDataTransfer;
+    private boolean isDataEntry;
+    private boolean isControlOfProcessing;
+    private boolean isAvailability;
+    private boolean isSeperation;
+
     private Date validFrom;
     private Date validTo;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "advId")
+    private List<DataCategoryDao> dataCategoryDao;
 
     @JsonIgnore
     private byte[] advInPdfFormat;
 
 
 //TODO fields & types need to be revisited once we have a front end
-  /*  private Set<String> tom;*/
-    /*private byte[] advDocument;*/
+
+
 
 
     public Long getId() {
@@ -60,22 +81,6 @@ public class Adv {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
-    }
-
-    public String getPurposeOfCollection() {
-        return purposeOfCollection;
-    }
-
-    public void setPurposeOfCollection(String purposeOfCollection) {
-        this.purposeOfCollection = purposeOfCollection;
-    }
-
-    public String getCategoryOfDataSubjects() {
-        return categoryOfDataSubjects;
-    }
-
-    public void setCategoryOfDataSubjects(String categoryOfDataSubjects) {
-        this.categoryOfDataSubjects = categoryOfDataSubjects;
     }
 
     public String getPhysicalAccessControl() {
@@ -173,19 +178,76 @@ public class Adv {
     public void setPermanent(boolean permanent) {
         isPermanent = permanent;
     }
-/* public Set<String> getTom() {
-        return tom;
+
+    public boolean isPhysicalAccess() {
+        return isPhysicalAccess;
     }
 
-    public void setTom(Set<String> tom) {
-        this.tom = tom;
-    }*/
-
-    /*public byte[] getAdvDocument() {
-        return advDocument;
+    public void setPhysicalAccess(boolean physicalAccess) {
+        isPhysicalAccess = physicalAccess;
     }
 
-    public void setAdvDocument(byte[] advDocument) {
-        this.advDocument = advDocument;
-    }*/
+    public boolean isLogicalAccess() {
+        return isLogicalAccess;
+    }
+
+    public void setLogicalAccess(boolean logicalAccess) {
+        isLogicalAccess = logicalAccess;
+    }
+
+    public boolean isDataAccess() {
+        return isDataAccess;
+    }
+
+    public void setDataAccess(boolean dataAccess) {
+        isDataAccess = dataAccess;
+    }
+
+    public boolean isDataTransfer() {
+        return isDataTransfer;
+    }
+
+    public void setDataTransfer(boolean dataTransfer) {
+        isDataTransfer = dataTransfer;
+    }
+
+    public boolean isDataEntry() {
+        return isDataEntry;
+    }
+
+    public void setDataEntry(boolean dataEntry) {
+        isDataEntry = dataEntry;
+    }
+
+    public boolean isControlOfProcessing() {
+        return isControlOfProcessing;
+    }
+
+    public void setControlOfProcessing(boolean controlOfProcessing) {
+        isControlOfProcessing = controlOfProcessing;
+    }
+
+    public boolean isAvailability() {
+        return isAvailability;
+    }
+
+    public void setAvailability(boolean availability) {
+        isAvailability = availability;
+    }
+
+    public boolean isSeperation() {
+        return isSeperation;
+    }
+
+    public void setSeperation(boolean seperation) {
+        isSeperation = seperation;
+    }
+
+    public List<DataCategoryDao> getDataCategoryDao() {
+        return dataCategoryDao;
+    }
+
+    public void setDataCategoryDao(List<DataCategoryDao> dataCategoryDao) {
+        this.dataCategoryDao = dataCategoryDao;
+    }
 }

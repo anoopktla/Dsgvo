@@ -17,7 +17,7 @@ import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
 
 const appRoutes: Routes = [
-  { path: 'create-adv', component: MyNavComponent },
+  { path: 'create-advDao', component: MyNavComponent },
   { path: '', component: FirstPageComponent },
   { path: 'second-page', component: SecondPageComponent },
   { path: 'third-page', component: ThirdPageComponent }

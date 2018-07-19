@@ -6,7 +6,7 @@ import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.image.Image;
 import be.quodlibet.boxable.utils.PDStreamUtils;
-import de.logicline.adv.model.Customer;
+import de.logicline.adv.model.dao.CustomerDao;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -68,7 +68,7 @@ public class PdfUtil {
         fileAsInputStream.close();
     }
 
-    public InputStream createPdf(Customer customer) throws Exception {
+    public InputStream createPdf(CustomerDao customerDao) throws Exception {
         try {
             
             Resource resource = resourceLoader.getResource(PATH_PREFIX + FILE_SEPARATOR + templateDeFirstPart);
@@ -78,10 +78,10 @@ public class PdfUtil {
             fileAsInputStream = resource.getInputStream();
             PDDocument pdfSecondPart = PDDocument.load(fileAsInputStream);
 
-            pdfFirstPart.addPage(getFirstPage(customer));
-            pdfFirstPart.addPage(getSecondPage(customer));
-            pdfFirstPart.addPage(getThirdPage(customer));
-            pdfFirstPart.addPage(getFourthPage(customer));
+            pdfFirstPart.addPage(getFirstPage(customerDao));
+            pdfFirstPart.addPage(getSecondPage(customerDao));
+            pdfFirstPart.addPage(getThirdPage(customerDao));
+            pdfFirstPart.addPage(getFourthPage(customerDao));
             pdfFirstPart.addPage(pdfSecondPart.getPage(0));
 
 
@@ -107,7 +107,7 @@ public class PdfUtil {
 
     }
 
-    private PDPage getFirstPage(Customer customer) throws Exception {
+    private PDPage getFirstPage(CustomerDao customerDao) throws Exception {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
@@ -148,7 +148,7 @@ public class PdfUtil {
         row.createCell(50, messageSource.getMessage("firstPage.date", null, locale) + "12/1/2018");
         row.createCell(50, messageSource.getMessage("firstPage.date", null, locale) + " 12/1/2018");
         row = table.createRow(12);
-        row.createCell(50, messageSource.getMessage("salutation", null, locale) +" "+ customer.getFirstName() + " " + customer.getLastName());
+        row.createCell(50, messageSource.getMessage("salutation", null, locale) +" "+ customerDao.getFirstName() + " " + customerDao.getLastName());
         row.createCell(50, messageSource.getMessage("salutation", null, locale) + " Anoop");
         row = table.createRow(12);
         row.createCell(50, messageSource.getMessage("designation", null, locale) + " CEO");
@@ -187,7 +187,7 @@ public class PdfUtil {
 
 
 
-    private PDPage getSecondPage(Customer customer) throws Exception {
+    private PDPage getSecondPage(CustomerDao customerDao) throws Exception {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDType1Font font = PDType1Font.HELVETICA;
@@ -273,7 +273,7 @@ public class PdfUtil {
         return page;
     }
 
-    private PDPage getThirdPage(Customer customer) throws Exception {
+    private PDPage getThirdPage(CustomerDao customerDao) throws Exception {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDType1Font font = PDType1Font.HELVETICA;
@@ -297,7 +297,7 @@ public class PdfUtil {
 
     }
 
-    private PDPage getFourthPage(Customer customer) throws Exception {
+    private PDPage getFourthPage(CustomerDao customerDao) throws Exception {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
         PDType1Font font = PDType1Font.HELVETICA;

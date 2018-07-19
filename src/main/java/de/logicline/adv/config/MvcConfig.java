@@ -6,10 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -18,12 +15,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,11 +28,12 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private ObjectMapper objectMapper;
+    private static final String WEB_ROOT_PATH = "/WEB-INF/adv-web/dist/ngMat/";
 
     @Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/adv-web/dist/ngMat/");
+        resolver.setPrefix(WEB_ROOT_PATH);
         resolver.setSuffix(".html");
         return resolver;
     }
@@ -50,21 +46,23 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //if we need more static content, add the path and extension here.
+        //if we need to serve more static content, add the path and extension here.
         registry
                 .addResourceHandler("*.js", "*.css")
-                .addResourceLocations("/WEB-INF/adv-web/dist/ngMat/");
+                .addResourceLocations(WEB_ROOT_PATH);
 
 
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        //TODO need to remove this ,or add the needed urls, this is added just for development purpose
         registry.addMapping("/**");
     }
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-
+     //We might need this in future
         /*converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
 
         List<MediaType> supportedApplicationTypes = new ArrayList<>();

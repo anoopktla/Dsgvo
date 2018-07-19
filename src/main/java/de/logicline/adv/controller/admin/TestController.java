@@ -1,6 +1,6 @@
-package de.logicline.adv.controller;
+package de.logicline.adv.controller.admin;
 
-import de.logicline.adv.model.Customer;
+import de.logicline.adv.model.dao.CustomerDao;
 import de.logicline.adv.util.CustomerUtil;
 import de.logicline.adv.util.EmailUtil;
 import de.logicline.adv.util.PdfUtil;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.InputStream;
 
@@ -34,8 +33,8 @@ public class TestController {
 
     @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getAsPdf() throws Exception {
-        Customer customer = CustomerUtil.createDummyCustomer();
-        InputStream in = pdfUtil.createPdf(customer);
+        CustomerDao customerDao = CustomerUtil.createDummyCustomer();
+        InputStream in = pdfUtil.createPdf(customerDao);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
