@@ -33,7 +33,7 @@ public class CustomerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
     public Customer addOrModifyCustomer(Customer customer) {
-        boolean  isUpdate = false;
+
 
 
         try {
@@ -54,15 +54,25 @@ public class CustomerService {
                 AdvDao newAdvDao = customerDaoToBeSaved.getAdvDao().get(0);
                 newAdvDao.setAdvInPdfFormat(pdfInByteFormat);
                 advDaoList.add(newAdvDao);
-                isUpdate = true;
-            }
+                customerFromDb.setCountry(customer.getCompanyInfo().getCountry());
+                customerFromDb.setCity(customer.getCompanyInfo().getCity());
+                customerFromDb.setCompanyName(customer.getCompanyInfo().getCompanyName());
+                customerFromDb.setZipCode(customer.getCompanyInfo().getZipCode());
+                customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddressLine2());
+                customerFromDb.setBuildingNumber(customer.getCompanyInfo().getBuildingNumber());
+                customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
 
-            if (isUpdate) {
+                customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());
+                customerFromDb.setEmailAddress(customer.getPersonDetails().getEmailAddress());
+                customerFromDb.setPosition(customer.getPersonDetails().getPosition());
+                customerFromDb.setLastName(customer.getPersonDetails().getLastName());
+                customerFromDb.setFirstName(customer.getPersonDetails().getFirstName());
+                customerFromDb.setSalutation(customer.getPersonDetails().getSalutation());
                 emailService.sendEmail(customerFromDb);
                 return mapperFacade.map(customerRepository.save(customerFromDb), Customer.class);
+            }
 
-
-            } else {
+           else {
                 customerDaoToBeSaved.getAdvDao().get(0).setAdvInPdfFormat(pdfInByteFormat);
                 emailService.sendEmail(customerDaoToBeSaved);
                 return mapperFacade.map(customerRepository.save(customerDaoToBeSaved), Customer.class);
@@ -80,4 +90,6 @@ public class CustomerService {
 
         return mapperFacade.mapAsList(customerRepository.findAll(), Customer.class);
     }
+
+
 }

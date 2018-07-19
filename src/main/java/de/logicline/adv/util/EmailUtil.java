@@ -72,7 +72,8 @@ public class EmailUtil {
     }
 
 
-    public boolean sendEmail(String toEmail, String subject, String body, CustomerDao customerDao) {
+    public boolean sendEmail(String subject, String body, CustomerDao customerDao) {
+        String toEmail = customerDao.getEmailAddress();
 
         if (validateEmail(toEmail)) {
 

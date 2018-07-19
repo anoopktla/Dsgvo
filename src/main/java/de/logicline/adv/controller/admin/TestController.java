@@ -33,7 +33,7 @@ public class TestController {
 
     @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getAsPdf() throws Exception {
-        CustomerDao customerDao = CustomerUtil.createDummyCustomer();
+        CustomerDao customerDao = CustomerUtil.createDummyCustomer("anoop.krishnapillai@logicline.de",pdfUtil);
         InputStream in = pdfUtil.createPdf(customerDao);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
@@ -54,7 +54,7 @@ public class TestController {
 
     @RequestMapping(value = "/mail/{id:.+}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> sendTestEmail(@PathVariable(value = "id") String id) {
+    public ResponseEntity<String> sendTestEmail(@PathVariable(value = "id") String id) throws  Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
@@ -66,7 +66,7 @@ public class TestController {
 
         String message;
 
-        if (emailUtil.sendEmail(id, "test email", "This is a test email with attachment.", CustomerUtil.createDummyCustomer())) {
+        if (emailUtil.sendEmail("test email", "This is a test email with attachment.", CustomerUtil.createDummyCustomer(id,pdfUtil))) {
             message = "Email sent successfully to " + id;
             LOGGER.info(message);
 
