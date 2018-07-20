@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -68,7 +67,7 @@ public class CustomerService {
                 customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
                 //personal details
                 customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());
-                customerFromDb.setEmailAddress(customer.getPersonDetails().getEmailAddress());
+                customerFromDb.setEmailAddress(customer.getPersonDetails().getEmail());
                 customerFromDb.setPosition(customer.getPersonDetails().getPosition());
                 customerFromDb.setLastName(customer.getPersonDetails().getLastName());
                 customerFromDb.setFirstName(customer.getPersonDetails().getFirstName());

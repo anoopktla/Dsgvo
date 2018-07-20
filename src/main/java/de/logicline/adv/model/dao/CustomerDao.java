@@ -29,10 +29,10 @@ public class CustomerDao {
     private String lastName;
     private String position;
     private String emailAddress;
-    private int phoneNumber;
+    private Long phoneNumber;
     private String companyName;
     private String street;
-    private int buildingNumber;
+    private Long buildingNumber;
     private String addressLine2;
     private String zipCode;
     private String city;
@@ -61,11 +61,11 @@ public class CustomerDao {
         this.street = street;
     }
 
-    public int getBuildingNumber() {
+    public Long getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(int buildingNumber) {
+    public void setBuildingNumber(Long buildingNumber) {
         this.buildingNumber = buildingNumber;
     }
 
@@ -165,11 +165,11 @@ public class CustomerDao {
         this.emailAddress = emailAddress;
     }
 
-    public int getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
