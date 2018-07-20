@@ -18,10 +18,10 @@ public class CustomerUtil {
         customerDao.setLastName("Paul");
         customerDao.setPosition("VP");
         customerDao.setEmailAddress(id);
-        customerDao.setPhoneNumber(944701887);
+        customerDao.setPhoneNumber(944701887L);
         customerDao.setCompanyName("LogicLine");
         customerDao.setStreet("W madison street");
-        customerDao.setBuildingNumber(500);
+        customerDao.setBuildingNumber(500L);
         customerDao.setAddressLine2("chicago");
         customerDao.setZipCode("ec1a1hq");
         customerDao.setCity("Chicago");

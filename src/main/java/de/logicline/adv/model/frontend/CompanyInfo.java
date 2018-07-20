@@ -12,7 +12,7 @@ public class CompanyInfo {
     private String street;
 
     @NotNull
-    private int buildingNumber;
+    private Long buildingNumber;
 
     @NotNull
     private String addressLine2;
@@ -42,11 +42,11 @@ public class CompanyInfo {
         this.street = street;
     }
 
-    public int getBuildingNumber() {
+    public Long getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(int buildingNumber) {
+    public void setBuildingNumber(Long buildingNumber) {
         this.buildingNumber = buildingNumber;
     }
 
