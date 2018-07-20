@@ -8,7 +8,7 @@ import { AdvService } from "../app.service";
   templateUrl: './my-nav.component.html',
   styleUrls: ['./my-nav.component.css']
 })
-export class MyNavComponent {
+export class CreateAdvComponent {
   privacyForm: FormGroup
   companyForm: FormGroup
   contactForm: FormGroup
@@ -54,7 +54,7 @@ export class MyNavComponent {
       isDataAccess:[''],
       isDataTransfer:[''],
       isDataEntry:[''],
-      isControlOfProcessing:[''],
+      controlOfProcessingRequired:[''],
       isAvailability:[''],
       isSeparation:[''],
 
