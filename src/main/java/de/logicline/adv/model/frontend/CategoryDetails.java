@@ -1,6 +1,6 @@
 package de.logicline.adv.model.frontend;
 
-public class DataCategory {
+public class CategoryDetails {
     private String categoryOfData;
     private String purposeOfCollection;
     private String categoryOfSubjects;

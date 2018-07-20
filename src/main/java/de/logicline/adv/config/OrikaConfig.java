@@ -5,7 +5,7 @@ import de.logicline.adv.model.dao.CustomerDao;
 import de.logicline.adv.model.dao.DataCategoryDao;
 import de.logicline.adv.model.frontend.ContractInfo;
 import de.logicline.adv.model.frontend.Customer;
-import de.logicline.adv.model.frontend.DataCategory;
+import de.logicline.adv.model.frontend.CategoryDetails;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -48,7 +48,7 @@ public class OrikaConfig {
                 .byDefault()
                 .register();
 
-        mapperFactory.classMap(DataCategory.class, DataCategoryDao.class)
+        mapperFactory.classMap(CategoryDetails.class, DataCategoryDao.class)
 
                 .byDefault()
                 .register();

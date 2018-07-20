@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ContractInfo {
-    private List<DataCategory> dataCategories;
+    private List<CategoryDetails> dataCategories;
     private Date validFrom;
     private Date validTo;
     private boolean isPermanent;
@@ -25,11 +25,11 @@ public class ContractInfo {
     private String availablityControl;
     private String separationControl;
 
-    public List<DataCategory> getDataCategories() {
+    public List<CategoryDetails> getDataCategories() {
         return dataCategories;
     }
 
-    public void setDataCategories(List<DataCategory> dataCategories) {
+    public void setDataCategories(List<CategoryDetails> dataCategories) {
         this.dataCategories = dataCategories;
     }
 
