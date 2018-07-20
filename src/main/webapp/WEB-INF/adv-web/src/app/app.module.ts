@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MyNavComponent } from './my-nav/my-nav.component';
+
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { AdvService} from './app.service';
@@ -13,14 +13,16 @@ import {
   MatMenuModule,  MatTabsModule, MatFormFieldModule,MatOptionModule ,MatSelectModule,MatInputModule,MatCheckboxModule,MatGridListModule,MatDatepickerModule,
   MatNativeDateModule
 } from '@angular/material';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FirstPageComponent } from './first-page/first-page.component';
+import { MyNavComponent } from './my-nav/my-nav.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
 
 const appRoutes: Routes = [
   { path: 'create-adv', component: MyNavComponent },
-  { path: '', component: FirstPageComponent },
+  { path: '', component: HomePageComponent },
   { path: 'second-page', component: SecondPageComponent },
   { path: 'third-page', component: ThirdPageComponent }
 ];
@@ -29,7 +31,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MyNavComponent,
-    FirstPageComponent,
+    HomePageComponent,
     SecondPageComponent,
     ThirdPageComponent
   ],

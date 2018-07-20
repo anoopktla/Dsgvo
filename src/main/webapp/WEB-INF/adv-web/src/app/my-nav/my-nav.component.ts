@@ -79,6 +79,9 @@ export class MyNavComponent {
     this.adv = {};
   }
 
+  links = ['Settings', 'Create ADV', 'Email Template'];
+  activeLink = this.links[0];
+
   initItemRows() {
     return this.fb.group({
 
@@ -135,7 +138,7 @@ export class MyNavComponent {
       companyInfo: this.companyForm.value,
       personDetails: this.contactForm.value,
       emailDetails: this.emailInfoForm.value,
-      cotractInfo: this.contractCategoryForm.value
+      contractInfo: this.contractCategoryForm.value
     }
     this.changeTabIndex(5);
   }

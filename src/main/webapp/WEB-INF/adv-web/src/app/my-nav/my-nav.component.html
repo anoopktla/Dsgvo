@@ -1,3 +1,10 @@
+
+<nav mat-tab-nav-bar>
+  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Setting</div>
+  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Create ADV</div>
+  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Email Template</div>
+</nav>
+<router-outlet></router-outlet>
 <mat-tab-group [selectedIndex]="selectedTab">
   <mat-tab label="Privacy Policy">
     <form [formGroup]="privacyForm">
@@ -126,7 +133,8 @@
                 <textarea class="form-control" formControlName="categoryOfData" rows="2"></textarea> </div>
               <div class="form-group col-md-3">
                 <label for="collectionPurpose">Purpose of collection,processing or use of data</label>
-                <textarea class="form-control" formControlName="purposeOfCollection" rows="2"></textarea> </div>
+                <textarea class="form-control" formControlName="purposeOfCollection"
+                  rows="2"></textarea> </div>
               <div class="form-group col-md-4">
                 <label for="position">Category of data subjects the date relates to</label>
                 <textarea class="form-control" rows="2" formControlName="categoryOfSubjects"></textarea> </div>
@@ -144,7 +152,7 @@
         <div class="col-12  contract-tom row">
           <div class="col-7">
             <p class="card-title">Technical and organisational measures (TOM)</p>
-            <div class="form-group row" >
+            <div class="form-group row">
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" formControlName="isPhysicalAccess">
                 <label class="col-form-label">physical access control</label>
@@ -158,7 +166,7 @@
                 <label class="col-form-label">logical access control</label>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control"   formControlName="logicalAccessControl"> </div>
+                <input type="text" class="form-control" formControlName="logicalAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
@@ -166,7 +174,7 @@
                 <label class="col-form-label">data access control</label>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control"  formControlName="dataAccessControl"> </div>
+                <input type="text" class="form-control" formControlName="dataAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
@@ -239,7 +247,7 @@
   </mat-tab>
   <mat-tab label="Email Details">
     <div class="container-fluid">
-      <form  [formGroup]="emailInfoForm">
+      <form [formGroup]="emailInfoForm">
         <div class="col-12">
           <mat-form-field>
             <mat-select placeholder="Email Templates" formControlName="emailTemplate">
@@ -249,19 +257,19 @@
         </div>
         <div class="col-12">
           <mat-form-field>
-            <mat-label >CC</mat-label>
-            <input matInput formControlName="cc"> 
+            <mat-label>CC</mat-label>
+            <input matInput formControlName="cc">
             <mat-error *ngIf="emailInfoForm.controls['cc'].errors?.email">invalid Mail</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>bcc</mat-label>
-            <input matInput  formControlName="bcc">
+            <input matInput formControlName="bcc">
             <mat-error *ngIf="emailInfoForm.controls['bcc'].errors?.email">invalid Mail</mat-error>
           </mat-form-field>
         </div>
         <div class="button-row">
           <button mat-raised-button color="warn" class="m-2" type="button" (click)="changeTabIndex(3)">Previous</button>
-          <button mat-raised-button color="warn" [disabled]="emailInfoForm.invalid" (click)="generatePreview()" >Generate preview</button>
+          <button mat-raised-button color="warn" [disabled]="emailInfoForm.invalid" (click)="generatePreview()">Generate preview</button>
         </div>
       </form>
     </div>
