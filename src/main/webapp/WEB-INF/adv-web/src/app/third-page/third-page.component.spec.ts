@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThirdPageComponent } from './third-page.component';
+import { EmailTemplateComponent } from './third-page.component';
 
-describe('ThirdPageComponent', () => {
-  let component: ThirdPageComponent;
-  let fixture: ComponentFixture<ThirdPageComponent>;
+describe('EmailTemplateComponent', () => {
+  let component: EmailTemplateComponent;
+  let fixture: ComponentFixture<EmailTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThirdPageComponent ]
+      declarations: [ EmailTemplateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThirdPageComponent);
+    fixture = TestBed.createComponent(EmailTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -11,17 +11,17 @@ import { AdvService } from './app.service';
 import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule,
   MatMenuModule, MatTabsModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,MatProgressSpinnerModule
 } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAdvComponent } from './my-nav/my-nav.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AdvComponent } from './adv/adv.component';
-import { ThirdPageComponent } from './third-page/third-page.component';
+import { EmailTemplateComponent } from './third-page/third-page.component';
 
 const appRoutes: Routes = [
-  // { path: 'create-adv', component: CreateAdvComponent },
+
   { path: '', component: HomePageComponent },
   {
     path: 'adv', component: AdvComponent,
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'email-template',
-        component: ThirdPageComponent,
+        component: EmailTemplateComponent,
 
       }
     ]
@@ -46,7 +46,7 @@ const appRoutes: Routes = [
     CreateAdvComponent,
     HomePageComponent,
     AdvComponent,
-    ThirdPageComponent
+    EmailTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +71,8 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
 
 
   ],

@@ -63,7 +63,7 @@ export class CreateAdvComponent {
       dataAccessControl:[''],
       dataTransferControl:[''],
       dataEntryControl:[''],
-      controlOfProcessing:[''],
+      processControl:[''],
       availabilityControl:[''],
       separationControl:['']
 

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './third-page.component.html',
   styleUrls: ['./third-page.component.css']
 })
-export class ThirdPageComponent implements OnInit {
+export class EmailTemplateComponent implements OnInit {
 
   constructor() { }
 
