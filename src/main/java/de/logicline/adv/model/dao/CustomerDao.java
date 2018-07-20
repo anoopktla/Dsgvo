@@ -41,17 +41,12 @@ public class CustomerDao {
 
     private String cc;
     private String bcc;
+    private String emailTemplate;
 
-
-    @ElementCollection
-    @CollectionTable(name = "customer_email_address", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "cc_email")
-    private Set<String> ccEmail = new HashSet<>();
-
-    @ElementCollection
+    /*@ElementCollection
     @CollectionTable(name = "customer_email_address", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "bcc_email")
-    private Set<String> bccEmail = new HashSet<>();
+    private Set<String> bccEmail = new HashSet<>();*/
 
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -194,19 +189,11 @@ public class CustomerDao {
         this.bcc = bcc;
     }
 
-    public Set<String> getCcEmail() {
-        return ccEmail;
+    public String getEmailTemplate() {
+        return emailTemplate;
     }
 
-    public void setCcEmail(Set<String> ccEmail) {
-        this.ccEmail = ccEmail;
-    }
-
-    public Set<String> getBccEmail() {
-        return bccEmail;
-    }
-
-    public void setBccEmail(Set<String> bccEmail) {
-        this.bccEmail = bccEmail;
+    public void setEmailTemplate(String emailTemplate) {
+        this.emailTemplate = emailTemplate;
     }
 }

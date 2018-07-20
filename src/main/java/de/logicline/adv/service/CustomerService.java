@@ -50,10 +50,12 @@ public class CustomerService {
 
             CustomerDao customerFromDb = customerRepository.findCustomerByEmailId(customerDaoToBeSaved.getEmailAddress());
             if(customerFromDb != null){
+                //adding adv
                 List<AdvDao> advDaoList = customerFromDb.getAdvDao();
                 AdvDao newAdvDao = customerDaoToBeSaved.getAdvDao().get(0);
                 newAdvDao.setAdvInPdfFormat(pdfInByteFormat);
                 advDaoList.add(newAdvDao);
+                //company datails
                 customerFromDb.setCountry(customer.getCompanyInfo().getCountry());
                 customerFromDb.setCity(customer.getCompanyInfo().getCity());
                 customerFromDb.setCompanyName(customer.getCompanyInfo().getCompanyName());
@@ -61,13 +63,18 @@ public class CustomerService {
                 customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddressLine2());
                 customerFromDb.setBuildingNumber(customer.getCompanyInfo().getBuildingNumber());
                 customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
-
+                //personal details
                 customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());
                 customerFromDb.setEmailAddress(customer.getPersonDetails().getEmailAddress());
                 customerFromDb.setPosition(customer.getPersonDetails().getPosition());
                 customerFromDb.setLastName(customer.getPersonDetails().getLastName());
                 customerFromDb.setFirstName(customer.getPersonDetails().getFirstName());
                 customerFromDb.setSalutation(customer.getPersonDetails().getSalutation());
+                //email details
+                customerFromDb.setCc(customer.getEmailDetails().getCc());
+                customerFromDb.setBcc(customer.getEmailDetails().getBcc());
+                customerFromDb.setEmailTemplate(customer.getEmailDetails().getEmailTemplate());
+
                 emailService.sendEmail(customerFromDb);
                 return mapperFacade.map(customerRepository.save(customerFromDb), Customer.class);
             }

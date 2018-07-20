@@ -78,7 +78,9 @@ public class EmailUtil {
         if (validateEmail(toEmail)) {
 
             try {
-                ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(customerDao.getAdvDao().get(0).getAdvInPdfFormat(), MediaType.APPLICATION_PDF_VALUE);
+                List<AdvDao> advDaos = customerDao.getAdvDao();
+                //todo phase 1 returning last adv to send email
+                ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(advDaos.get(advDaos.size()-1).getAdvInPdfFormat(), MediaType.APPLICATION_PDF_VALUE);
                 Message message = new MimeMessage(getSession());
                 Multipart multipart = new MimeMultipart();
 
@@ -99,6 +101,12 @@ public class EmailUtil {
                 message.setSubject(subject);
                 message.setSentDate(new Date());
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+                if(!StringUtils.isEmpty(customerDao.getCc()) && validateEmail(customerDao.getCc())){
+                message.setRecipients(Message.RecipientType.CC,InternetAddress.parse(customerDao.getCc(),false));
+                }
+                if(!StringUtils.isEmpty(customerDao.getBcc()) && validateEmail(customerDao.getBcc())){
+                message.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(customerDao.getBcc(),false));
+                }
                 Transport.send(message);
                 LOGGER.info("successfully  sent email to {}",toEmail);
                 return true;

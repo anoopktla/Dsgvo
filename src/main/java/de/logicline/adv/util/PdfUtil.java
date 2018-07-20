@@ -68,7 +68,7 @@ public class PdfUtil {
         fileAsInputStream.close();
     }
 
-    public InputStream createPdf(CustomerDao customerDao) throws Exception {
+    public InputStream createPdf(CustomerDao customer) throws Exception {
         try {
             
             Resource resource = resourceLoader.getResource(PATH_PREFIX + FILE_SEPARATOR + templateDeFirstPart);
@@ -78,10 +78,10 @@ public class PdfUtil {
             fileAsInputStream = resource.getInputStream();
             PDDocument pdfSecondPart = PDDocument.load(fileAsInputStream);
 
-            pdfFirstPart.addPage(getFirstPage(customerDao));
-            pdfFirstPart.addPage(getSecondPage(customerDao));
-            pdfFirstPart.addPage(getThirdPage(customerDao));
-            pdfFirstPart.addPage(getFourthPage(customerDao));
+            pdfFirstPart.addPage(getFirstPage(customer));
+            pdfFirstPart.addPage(getSecondPage(customer));
+            pdfFirstPart.addPage(getThirdPage(customer));
+            pdfFirstPart.addPage(getFourthPage(customer));
             pdfFirstPart.addPage(pdfSecondPart.getPage(0));
 
 
