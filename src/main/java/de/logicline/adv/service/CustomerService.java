@@ -61,9 +61,9 @@ public class CustomerService {
                 customerFromDb.setCountry(customer.getCompanyInfo().getCountry());
                 customerFromDb.setCity(customer.getCompanyInfo().getCity());
                 customerFromDb.setCompanyName(customer.getCompanyInfo().getCompanyName());
-                customerFromDb.setZipCode(customer.getCompanyInfo().getZipCode());
-                customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddressLine2());
-                customerFromDb.setBuildingNumber(customer.getCompanyInfo().getBuildingNumber());
+                customerFromDb.setZipCode(customer.getCompanyInfo().getZip());
+                customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddress());
+                customerFromDb.setBuildingNumber(customer.getCompanyInfo().getNo());
                 customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
                 //personal details
                 customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());

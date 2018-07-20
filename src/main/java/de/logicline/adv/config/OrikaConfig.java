@@ -30,9 +30,9 @@ public class OrikaConfig {
                 //company info starts
                 .field("companyInfo.companyName", "companyName")
                 .field("companyInfo.street", "street")
-                .field("companyInfo.buildingNumber", "buildingNumber")
-                .field("companyInfo.addressLine2", "addressLine2")
-                .field("companyInfo.zipCode", "zipCode")
+                .field("companyInfo.no", "buildingNumber")
+                .field("companyInfo.address", "addressLine2")
+                .field("companyInfo.zip", "zipCode")
                 .field("companyInfo.city", "city")
                 .field("companyInfo.country", "country")
 
