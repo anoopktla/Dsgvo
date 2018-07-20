@@ -148,11 +148,11 @@ public class PdfUtil {
         row.createCell(50, messageSource.getMessage("firstPage.date", null, locale) + "12/1/2018");
         row.createCell(50, messageSource.getMessage("firstPage.date", null, locale) + " 12/1/2018");
         row = table.createRow(12);
-        row.createCell(50, messageSource.getMessage("salutation", null, locale) +" "+ customerDao.getFirstName() + " " + customerDao.getLastName());
-        row.createCell(50, messageSource.getMessage("salutation", null, locale) + " Anoop");
+        row.createCell(50, customerDao.getSalutation()+" "+ customerDao.getFirstName() + " " + customerDao.getLastName());
+        row.createCell(50,  " Logicline");
         row = table.createRow(12);
         row.createCell(50, messageSource.getMessage("designation", null, locale) + " CEO");
-        row.createCell(50, messageSource.getMessage("designation", null, locale) + " Dev");
+        row.createCell(50, messageSource.getMessage("designation", null, locale) + " ");
         row = table.createRow(12);
         row.createCell(50, messageSource.getMessage("signature", null, locale));
         row.createCell(50, messageSource.getMessage("signature", null, locale));
@@ -181,6 +181,7 @@ public class PdfUtil {
         row.createCell(50, "Sample data");
         table.draw();
         contentStream.close();
+
 
         return page;
     }
@@ -212,11 +213,11 @@ public class PdfUtil {
         row.createCell(50, "Datum: 12/1/2018");
         row.createCell(50, "Datum: 12/1/2018");
         row = table.createRow(12);
-        row.createCell(50, "Name: Herr Thomas");
-        row.createCell(50, "Name: Herr Anoop");
+        row.createCell(50, "Name: "+customerDao.getSalutation()+" "+customerDao.getFirstName()+" "+customerDao.getLastName());
+        row.createCell(50, "Name: Logicline GmbH  ");
         row = table.createRow(12);
         row.createCell(50, "Funktion: CEO");
-        row.createCell(50, "Funktion: Dev");
+        row.createCell(50, "Funktion:  ");
         row = table.createRow(12);
         row.createCell(50, "Unterschrift:");
         row.createCell(50, "Unterschrift:");
@@ -293,6 +294,7 @@ public class PdfUtil {
         PDStreamUtils.write(contentStream, "sample data sample data", font, 8.0f, 50, 510.0f, Color.BLACK);
         PDStreamUtils.write(contentStream, "sample data sample data", font, 8.0f, 50, 495.0f, Color.BLACK);
         contentStream.close();
+
         return page;
 
     }
@@ -330,6 +332,7 @@ public class PdfUtil {
         row.createCell(20, "Sample data");
         table.draw();
         contentStream.close();
+
         return page;
     }
 }

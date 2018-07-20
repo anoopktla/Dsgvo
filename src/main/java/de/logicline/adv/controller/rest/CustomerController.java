@@ -21,36 +21,34 @@ import javax.validation.Valid;
 public class CustomerController {
 
 
-
     @Autowired
     CustomerService customerService;
 
     @PostMapping("/customers")
-    public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer customer){
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         //TODO server side validation
         HttpHeaders headers = getHttpHeaders();
         ResponseEntity<Customer> response;
         headers.setContentType(MediaType.APPLICATION_JSON);
         customer = customerService.addOrModifyCustomer(customer);
 
-        if(!(customer == null)){
-            response = new  ResponseEntity<>(customer,headers,HttpStatus.CREATED);
-        }
-        else {
-            response = new ResponseEntity<>(null ,headers,HttpStatus.INTERNAL_SERVER_ERROR);
+        if (!(customer == null)) {
+            response = new ResponseEntity<>(customer, headers, HttpStatus.CREATED);
+        } else {
+            response = new ResponseEntity<>(null, headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return response;
     }
 
     @GetMapping("/customers")
-    public Iterable<Customer> getCustomers(){
+    public Iterable<Customer> getCustomers() {
 
         return customerService.getAllCustomers();
 
     }
 
-    private  HttpHeaders getHttpHeaders(){
+    private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST");

@@ -14,7 +14,7 @@ public class EmailService {
     public void sendEmail(CustomerDao customerDao){
         //TODO hardcoded values
 
-        emailUtil.sendEmail("ADV","Body need to come from template", customerDao);
+        emailUtil.sendEmail("Auftragsdatenverarbeitung", customerDao);
 
 
     }

@@ -32,7 +32,7 @@ public class CustomerDao {
     private Long phoneNumber;
     private String companyName;
     private String street;
-    private Long buildingNumber;
+    private String buildingNumber;
     private String addressLine2;
     private String zipCode;
     private String city;
@@ -61,11 +61,11 @@ public class CustomerDao {
         this.street = street;
     }
 
-    public Long getBuildingNumber() {
+    public String getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(Long buildingNumber) {
+    public void setBuildingNumber(String buildingNumber) {
         this.buildingNumber = buildingNumber;
     }
 

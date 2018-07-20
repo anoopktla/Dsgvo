@@ -66,7 +66,7 @@ public class TestController {
 
         String message;
 
-        if (emailUtil.sendEmail("test email", "This is a test email with attachment.", CustomerUtil.createDummyCustomer(id,pdfUtil))) {
+        if (emailUtil.sendEmail("test email",  CustomerUtil.createDummyCustomer(id,pdfUtil))) {
             message = "Email sent successfully to " + id;
             LOGGER.info(message);
 

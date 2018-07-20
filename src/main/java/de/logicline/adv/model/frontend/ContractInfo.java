@@ -13,7 +13,7 @@ public class ContractInfo {
     private boolean isDataAccess;
     private boolean isDataTransfer;
     private boolean isDataEntry;
-    private boolean isControlOfProcessing;
+    private boolean controlOfProcessingRequired;
     private boolean isAvailability;
     private boolean isSeparation;
     private String physicalAccessControl;
@@ -21,9 +21,17 @@ public class ContractInfo {
     private String dataAccessControl;
     private String dataTransferControl;
     private String dataEntryControl;
-    private String controlOfProcessing;
+    private String processControl;
     private String availabilityControl;
     private String separationControl;
+
+    public String getProcessControl() {
+        return processControl;
+    }
+
+    public void setProcessControl(String processControl) {
+        this.processControl = processControl;
+    }
 
     public List<CategoryDetails> getDataCategories() {
         return dataCategories;
@@ -97,12 +105,12 @@ public class ContractInfo {
         isDataEntry = dataEntry;
     }
 
-    public boolean isControlOfProcessing() {
-        return isControlOfProcessing;
+    public boolean isControlOfProcessingRequired() {
+        return controlOfProcessingRequired;
     }
 
-    public void setControlOfProcessing(boolean controlOfProcessing) {
-        isControlOfProcessing = controlOfProcessing;
+    public void setControlOfProcessingRequired(boolean controlOfProcessingRequired) {
+        this.controlOfProcessingRequired = controlOfProcessingRequired;
     }
 
     public boolean isAvailability() {
@@ -137,6 +145,8 @@ public class ContractInfo {
         this.logicalAccessControl = logicalAccessControl;
     }
 
+
+
     public String getDataAccessControl() {
         return dataAccessControl;
     }
@@ -161,13 +171,6 @@ public class ContractInfo {
         this.dataEntryControl = dataEntryControl;
     }
 
-    public String getControlOfProcessing() {
-        return controlOfProcessing;
-    }
-
-    public void setControlOfProcessing(String controlOfProcessing) {
-        this.controlOfProcessing = controlOfProcessing;
-    }
 
     public String getAvailabilityControl() {
         return availabilityControl;
@@ -180,6 +183,8 @@ public class ContractInfo {
     public String getSeparationControl() {
         return separationControl;
     }
+
+
 
     public void setSeparationControl(String separationControl) {
         this.separationControl = separationControl;

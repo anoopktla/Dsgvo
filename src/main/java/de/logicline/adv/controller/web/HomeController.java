@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     //to load the home page, this app contains web-content as well as RESTFUL endpoints
 
-    @RequestMapping("/create-adv")
+    @RequestMapping("/")
     public String home() {
         return "index";
     }

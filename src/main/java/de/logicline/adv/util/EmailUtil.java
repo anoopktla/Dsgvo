@@ -72,7 +72,7 @@ public class EmailUtil {
     }
 
 
-    public boolean sendEmail(String subject, String body, CustomerDao customerDao) {
+    public boolean sendEmail(String subject, CustomerDao customerDao) {
         String toEmail = customerDao.getEmailAddress();
 
         if (validateEmail(toEmail)) {
@@ -85,7 +85,11 @@ public class EmailUtil {
                 Multipart multipart = new MimeMultipart();
 
                 MimeBodyPart messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setContent(body, CONTENT_TYPE);
+                if(!StringUtils.isEmpty(customerDao.getEmailTemplate())){
+                    messageBodyPart.setContent(customerDao.getEmailTemplate(), CONTENT_TYPE);
+                }else {
+                    messageBodyPart.setContent("Auftragsdatenverarbeitung ", CONTENT_TYPE);
+                }
                 MimeBodyPart messageAttachmentPart = new MimeBodyPart();
 
                 messageAttachmentPart.setDataHandler(new DataHandler(byteArrayDataSource));

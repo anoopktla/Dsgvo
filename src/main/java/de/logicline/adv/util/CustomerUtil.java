@@ -21,13 +21,14 @@ public class CustomerUtil {
         customerDao.setPhoneNumber(944701887L);
         customerDao.setCompanyName("LogicLine");
         customerDao.setStreet("W madison street");
-        customerDao.setBuildingNumber(500L);
+        customerDao.setBuildingNumber("500");
         customerDao.setAddressLine2("chicago");
         customerDao.setZipCode("ec1a1hq");
         customerDao.setCity("Chicago");
         customerDao.setCountry("USA");
         customerDao.setCc("anoop.krishnapillai@logicline.de");
         customerDao.setBcc("anoop.krishnapillai@heidelsoft.de");
+        customerDao.setEmailTemplate("Test email body");
         AdvDao advDao = new AdvDao();
         advDao.setAdvInPdfFormat( IOUtils.toByteArray(pdfUtil.createPdf(customerDao)));
         List<AdvDao> advDaos = new ArrayList<>();

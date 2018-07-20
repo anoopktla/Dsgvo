@@ -34,7 +34,7 @@ public class AdvDao {
     private String dataTransferControl;
     private String dataEntryControl;
     private String controlOfProcessing;
-    private String availablityControl;
+    private String availabilityControl;
     private String separationControl;
 
     private  boolean isPermanent;
@@ -45,7 +45,7 @@ public class AdvDao {
     private boolean isDataEntry;
     private boolean isControlOfProcessing;
     private boolean isAvailability;
-    private boolean isSeperation;
+    private boolean isSeparation;
 
     private Date validFrom;
     private Date validTo;
@@ -127,12 +127,12 @@ public class AdvDao {
         this.controlOfProcessing = controlOfProcessing;
     }
 
-    public String getAvailablityControl() {
-        return availablityControl;
+    public String getAvailabilityControl() {
+        return availabilityControl;
     }
 
-    public void setAvailablityControl(String availablityControl) {
-        this.availablityControl = availablityControl;
+    public void setAvailabilityControl(String availabilityControl) {
+        this.availabilityControl = availabilityControl;
     }
 
     public String getSeparationControl() {
@@ -231,12 +231,12 @@ public class AdvDao {
         isAvailability = availability;
     }
 
-    public boolean isSeperation() {
-        return isSeperation;
+    public boolean isSeparation() {
+        return isSeparation;
     }
 
-    public void setSeperation(boolean seperation) {
-        isSeperation = seperation;
+    public void setSeparation(boolean separation) {
+        isSeparation = separation;
     }
 
     public List<DataCategoryDao> getDataCategoryDao() {
