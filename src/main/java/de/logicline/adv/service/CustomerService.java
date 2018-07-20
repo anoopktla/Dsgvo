@@ -42,6 +42,8 @@ public class CustomerService {
             CustomerDao customerDaoToBeSaved = mapperFacade.map(customer, CustomerDao.class);
 
             //TODO for phase 1, we don't have user login feature, so just taking first adv from list to create pdf
+            LOGGER.info("customerDao ",customerDaoToBeSaved.toString());
+            LOGGER.info("adv size in customerDao is {} ",customerDaoToBeSaved.getAdvDao().size());
             byte[] pdfInByteFormat = IOUtils.toByteArray(pdfUtil.createPdf(customerDaoToBeSaved));
             LOGGER.info("size of pdf in bytes is {}",pdfInByteFormat.length);
             if (pdfInByteFormat.length == 0) {
@@ -81,8 +83,7 @@ public class CustomerService {
             }
 
            else {
-                LOGGER.info("customerDao ",customerDaoToBeSaved.toString());
-                LOGGER.info("adv size in customerDao is {} ",customerDaoToBeSaved.getAdvDao().size());
+
                 customerDaoToBeSaved.getAdvDao().get(0).setAdvInPdfFormat(pdfInByteFormat);
                 emailService.sendEmail(customerDaoToBeSaved);
                 return mapperFacade.map(customerRepository.save(customerDaoToBeSaved), Customer.class);
