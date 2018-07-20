@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -62,13 +61,13 @@ public class CustomerService {
                 customerFromDb.setCountry(customer.getCompanyInfo().getCountry());
                 customerFromDb.setCity(customer.getCompanyInfo().getCity());
                 customerFromDb.setCompanyName(customer.getCompanyInfo().getCompanyName());
-                customerFromDb.setZipCode(customer.getCompanyInfo().getZipCode());
-                customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddressLine2());
-                customerFromDb.setBuildingNumber(customer.getCompanyInfo().getBuildingNumber());
+                customerFromDb.setZipCode(customer.getCompanyInfo().getZip());
+                customerFromDb.setAddressLine2(customer.getCompanyInfo().getAddress());
+                customerFromDb.setBuildingNumber(customer.getCompanyInfo().getNo());
                 customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
                 //personal details
                 customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());
-                customerFromDb.setEmailAddress(customer.getPersonDetails().getEmailAddress());
+                customerFromDb.setEmailAddress(customer.getPersonDetails().getEmail());
                 customerFromDb.setPosition(customer.getPersonDetails().getPosition());
                 customerFromDb.setLastName(customer.getPersonDetails().getLastName());
                 customerFromDb.setFirstName(customer.getPersonDetails().getFirstName());

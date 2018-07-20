@@ -22,7 +22,7 @@ public class ContractInfo {
     private String dataTransferControl;
     private String dataEntryControl;
     private String controlOfProcessing;
-    private String availablityControl;
+    private String availabilityControl;
     private String separationControl;
 
     public List<CategoryDetails> getDataCategories() {
@@ -169,12 +169,12 @@ public class ContractInfo {
         this.controlOfProcessing = controlOfProcessing;
     }
 
-    public String getAvailablityControl() {
-        return availablityControl;
+    public String getAvailabilityControl() {
+        return availabilityControl;
     }
 
-    public void setAvailablityControl(String availablityControl) {
-        this.availablityControl = availablityControl;
+    public void setAvailabilityControl(String availabilityControl) {
+        this.availabilityControl = availabilityControl;
     }
 
     public String getSeparationControl() {

@@ -18,10 +18,10 @@ public class PersonDetails {
     private String position;
 
     @NotNull
-    private String emailAddress;
+    private String email;
 
     @NotNull
-    private int phoneNumber;
+    private Long phoneNumber;
 
     public String getSalutation() {
         return salutation;
@@ -55,19 +55,19 @@ public class PersonDetails {
         this.position = position;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

@@ -12,13 +12,13 @@ public class CompanyInfo {
     private String street;
 
     @NotNull
-    private int buildingNumber;
+    private Long no;
 
     @NotNull
-    private String addressLine2;
+    private String address;
 
     @NotNull
-    private String zipCode;
+    private String zip;
 
     @NotNull
     private String city;
@@ -42,28 +42,28 @@ public class CompanyInfo {
         this.street = street;
     }
 
-    public int getBuildingNumber() {
-        return buildingNumber;
+    public Long getNo() {
+        return no;
     }
 
-    public void setBuildingNumber(int buildingNumber) {
-        this.buildingNumber = buildingNumber;
+    public void setNo(Long no) {
+        this.no = no;
     }
 
-    public String getAddressLine2() {
-        return addressLine2;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getZipCode() {
-        return zipCode;
+    public String getZip() {
+        return zip;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public String getCity() {

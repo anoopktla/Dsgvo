@@ -25,14 +25,14 @@ public class OrikaConfig {
                 .field("personDetails.firstName", "firstName")
                 .field("personDetails.lastName", "lastName")
                 .field("personDetails.position", "position")
-                .field("personDetails.emailAddress", "emailAddress")
+                .field("personDetails.email", "emailAddress")
                 .field("personDetails.phoneNumber", "phoneNumber")
                 //company info starts
                 .field("companyInfo.companyName", "companyName")
                 .field("companyInfo.street", "street")
-                .field("companyInfo.buildingNumber", "buildingNumber")
-                .field("companyInfo.addressLine2", "addressLine2")
-                .field("companyInfo.zipCode", "zipCode")
+                .field("companyInfo.no", "buildingNumber")
+                .field("companyInfo.address", "addressLine2")
+                .field("companyInfo.zip", "zipCode")
                 .field("companyInfo.city", "city")
                 .field("companyInfo.country", "country")
 
