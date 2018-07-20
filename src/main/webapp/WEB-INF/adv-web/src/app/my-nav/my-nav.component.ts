@@ -46,8 +46,8 @@ export class MyNavComponent {
 
     this.contractCategoryForm = this.fb.group({
       categoryDetails: this.fb.array([this.initItemRows()]),
-      vaidFrom:[''],
-      vaidTo:[''],
+      validFrom:[''],
+      validTo:[''],
       permanent:[''],
       isPhysicalAccess:[''],
       isLogicalAccess:[''],
@@ -56,7 +56,7 @@ export class MyNavComponent {
       isDataEntry:[''],
       isControlOfProcessing:[''],
       isAvailability:[''],
-      isSeperation:[''],
+      isSeparation:[''],
 
       physicalAccessControl:[''],
       logicalAccessControl:[''],
@@ -65,7 +65,7 @@ export class MyNavComponent {
       dataEntryControl:[''],
       controlOfProcessing:[''],
       availabilityControl:[''],
-      seperationControl:['']
+      separationControl:['']
 
     });
 

@@ -1,11 +1,10 @@
-
 <nav mat-tab-nav-bar>
-  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Setting</div>
-  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Create ADV</div>
-  <div mat-tab-link routerLink="/create-adv"  routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Email Template</div>
+  <div mat-tab-link routerLink="/create-adv" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Setting</div>
+  <div mat-tab-link routerLink="/create-adv" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Create ADV</div>
+  <div mat-tab-link routerLink="/create-adv" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Email Template</div>
 </nav>
 <router-outlet></router-outlet>
-<mat-tab-group [selectedIndex]="selectedTab">
+<mat-tab-group [selectedIndex]="selectedTab" [color]="red">
   <mat-tab label="Privacy Policy">
     <form [formGroup]="privacyForm">
       <div class="privacy-container ">
@@ -154,81 +153,75 @@
             <p class="card-title">Technical and organisational measures (TOM)</p>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isPhysicalAccess">
-                <label class="col-form-label">physical access control</label>
+                <mat-checkbox formControlName="isPhysicalAccess">physical access control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="physicalAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isLogicalAccess">
-                <label class="col-form-label">logical access control</label>
+                <mat-checkbox formControlName="isLogicalAccess">logical access control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="logicalAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isDataAccess">
-                <label class="col-form-label">data access control</label>
+                <mat-checkbox formControlName="isDataAccess">data access control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="dataAccessControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isDataTransfer">
-                <label class="col-form-label">data transfer control</label>
+                <mat-checkbox formControlName="isDataTransfer">data transfer control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="dataTransferControl"> </div>
             </div>
             <div class="form-group row ">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isDataEntry">
-                <label class="col-form-label">data entry control</label>
+                <mat-checkbox formControlName="isDataEntry">data entry control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="dataEntryControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isControlOfProcessing">
-                <label class="col-form-label">control of processing Instructions</label>
+                <mat-checkbox formControlName="isControlOfProcessing">control of processing</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="controlOfProcessing"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isAvailability">
-                <label class="col-form-label">availability control</label>
+                  <mat-checkbox formControlName="isAvailability">availability control</mat-checkbox>
+              
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="availabilityControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" formControlName="isSeperation">
-                <label class="col-form-label">seperation control</label>
+                 <mat-checkbox formControlName="isSeparation">seperation control</mat-checkbox>
+              
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" formControlName="seperationControl"> </div>
+                <input type="text" class="form-control" formControlName="separationControl"> </div>
             </div>
           </div>
           <div class="col-4">
             <p class="card-title">Validity</p>
             <div class="row">
               <mat-form-field>
-                <input matInput [matDatepicker]="validFrom" [max]="startDate" placeholder="Valid from" formControlName="vaidFrom">
+                <input matInput [matDatepicker]="validFrom" [max]="startDate" placeholder="Valid from" formControlName="validFrom">
                 <mat-datepicker-toggle matSuffix [for]="validFrom"></mat-datepicker-toggle>
                 <mat-datepicker #validFrom [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field>
-                <input matInput [matDatepicker]="validTo" [min]="startDate" placeholder="Valid To" formControlName="vaidTo">
+                <input matInput [matDatepicker]="validTo" [min]="startDate" placeholder="Valid To" formControlName="validTo">
                 <mat-datepicker-toggle matSuffix [for]="validTo"></mat-datepicker-toggle>
                 <mat-datepicker #validTo></mat-datepicker>
               </mat-form-field>
@@ -275,15 +268,16 @@
     </div>
   </mat-tab>
   <mat-tab label="Preview">
-    <form class="col-12">
+    <section class="col-12">
       <h6 class="card-title">Contract Details</h6>
       <div class="privacy-container">
+        
         <mat-checkbox>I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
           point I can cancel that subscription through email or through clicking the unsubscribe link at the end of each
           news letter </mat-checkbox>
         <mat-checkbox>I have read the references to data security and accept them </mat-checkbox>
       </div>
-    </form>
+    </section>
     <form class="col-12">
       <h6 class="card-title">Company information</h6>
       <div class="form-group row">
@@ -444,8 +438,8 @@
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
-              <label class="col-form-label">seperation control</label>
+              <input type="checkbox" value="true" class="form-check-input">
+              <label class="col-form-label">separation control</label>
             </div>
             <div class="col-md-6">
               <input type="password" class="form-control"> </div>
@@ -472,19 +466,19 @@
       <div class="form-group row">
         <label class="col-3">Email Templates</label>
         <div class="col-5">
-          <div class="preview-info">Template 1</div>
+          <div class="preview-info"  *ngIf="adv.emailDetails">{{adv.emailDetails.emailTemplate}}</div>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-3">CC</label>
         <div class="col-5">
-          <div class="preview-info">jobin.joy@logicline.de</div>
+          <div class="preview-info"   *ngIf="adv.emailDetails">{{adv.emailDetails.cc}}</div>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-3">bcc</label>
         <div class="col-5">
-          <div class="preview-info">anoop.logicline.de</div>
+          <div class="preview-info"  *ngIf="adv.emailDetails">{{adv.emailDetails.bcc}}</div>
         </div>
       </div>
     </form>
