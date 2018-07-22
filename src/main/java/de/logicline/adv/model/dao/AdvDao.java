@@ -36,6 +36,7 @@ public class AdvDao {
     private String controlOfProcessing;
     private String availabilityControl;
     private String separationControl;
+    private String processControl;
 
     private  boolean isPermanent;
     private boolean isPhysicalAccess;
@@ -46,7 +47,6 @@ public class AdvDao {
     private boolean isControlOfProcessing;
     private boolean isAvailability;
     private boolean isSeparation;
-    private boolean emailSent;
 
     private Date validFrom;
     private Date validTo;
@@ -55,7 +55,11 @@ public class AdvDao {
     @JoinColumn(name = "advId")
     private List<DataCategoryDao> dataCategoryDao;
 
+    @JsonIgnore
     private byte[] advInPdfFormat;
+
+
+//TODO fields & types need to be revisited once we have a front end
 
 
 
@@ -244,11 +248,11 @@ public class AdvDao {
         this.dataCategoryDao = dataCategoryDao;
     }
 
-    public boolean isEmailSent() {
-        return emailSent;
+    public String getProcessControl() {
+        return processControl;
     }
 
-    public void setEmailSent(boolean emailSent) {
-        this.emailSent = emailSent;
+    public void setProcessControl(String processControl) {
+        this.processControl = processControl;
     }
 }

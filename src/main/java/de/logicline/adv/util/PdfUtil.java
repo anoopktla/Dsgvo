@@ -151,7 +151,7 @@ public class PdfUtil {
         row.createCell(50, customerDao.getSalutation()+" "+ customerDao.getFirstName() + " " + customerDao.getLastName());
         row.createCell(50,  " Logicline");
         row = table.createRow(12);
-        row.createCell(50, messageSource.getMessage("designation", null, locale) + " CEO");
+        row.createCell(50, messageSource.getMessage("designation", null, locale) + " Unterstützung");
         row.createCell(50, messageSource.getMessage("designation", null, locale) + " ");
         row = table.createRow(12);
         row.createCell(50, messageSource.getMessage("signature", null, locale));
@@ -216,7 +216,7 @@ public class PdfUtil {
         row.createCell(50, "Name: "+customerDao.getSalutation()+" "+customerDao.getFirstName()+" "+customerDao.getLastName());
         row.createCell(50, "Name: Logicline GmbH  ");
         row = table.createRow(12);
-        row.createCell(50, "Funktion: CEO");
+        row.createCell(50, "Funktion: Unterstützung");
         row.createCell(50, "Funktion:  ");
         row = table.createRow(12);
         row.createCell(50, "Unterschrift:");

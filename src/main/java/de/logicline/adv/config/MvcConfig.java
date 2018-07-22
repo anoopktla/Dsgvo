@@ -48,7 +48,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //if we need to serve more static content, add the path and extension here.
         registry
-                .addResourceHandler("*.js", "*.css")
+                .addResourceHandler("*.js", "*.css","*.woff","*.woff2","*.ttf")
                 .addResourceLocations(WEB_ROOT_PATH);
 
 
