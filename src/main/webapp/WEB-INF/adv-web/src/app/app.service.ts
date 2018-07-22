@@ -8,4 +8,7 @@ export class AdvService {
   createAdv(adv) {
     return this.http.post(this.baseUrl+'customers', adv);
   }
+  getCountries() {
+    return this.http.get(this.baseUrl+'countries');
+  }
 }

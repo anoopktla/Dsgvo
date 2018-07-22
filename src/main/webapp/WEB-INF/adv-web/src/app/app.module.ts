@@ -11,7 +11,7 @@ import { AdvService } from './app.service';
 import {
   MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule,
   MatMenuModule, MatTabsModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule,
-  MatNativeDateModule,MatProgressSpinnerModule
+  MatNativeDateModule,MatProgressSpinnerModule,MatSnackBarModule
 } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -72,8 +72,8 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    MatSnackBarModule
 
   ],
   providers: [AdvService],

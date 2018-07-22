@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 import { FormControl, FormBuilder, FormGroup, FormArray, Validator, Validators } from '@angular/forms';
 import { AdvService } from "../app.service";
+import { MatSnackBar } from "@angular/material";
 @Component({
   selector: 'my-nav',
   templateUrl: './my-nav.component.html',
@@ -16,7 +17,12 @@ export class CreateAdvComponent {
   selectedTab: number;
   contractCategoryForm: FormGroup;
   adv: object;
-  constructor(private fb: FormBuilder, private advService: AdvService) {
+  countries: any;
+  formLoading:boolean = false;
+  constructor(
+    private fb: FormBuilder,
+    private advService: AdvService,
+    private snackBar: MatSnackBar) {
     this.privacyForm = this.fb.group({
       checkboxOne: ['', Validators.requiredTrue],
       checkboxTwo: ['', Validators.requiredTrue],
@@ -77,6 +83,7 @@ export class CreateAdvComponent {
     });
     this.selectedTab = 0;
     this.adv = {};
+    this.getCountries();
   }
 
   links = ['Settings', 'Create ADV', 'Email Template'];
@@ -103,10 +110,6 @@ export class CreateAdvComponent {
     const control = <FormArray>this.contractCategoryForm.controls['categoryDetails'];
     control.removeAt(index);
   }
-  countries = [
-    { value: 'Germany' },
-    { value: 'India' }
-  ];
   salutations = [
     { value: 'Mr' },
     { value: 'Mrs' }
@@ -127,9 +130,20 @@ export class CreateAdvComponent {
     this.selectedTab = index;
   }
   createAdv(): void {
+    this.formLoading = true;
     this.advService.createAdv(this.adv)
       .subscribe(data => {
+        this.formLoading = false;
+        this.snackBar.open('ADV created successfully', null,{
+          duration: 2000,
+        });
         console.log('data...', data);
+      }, error => {
+        this.snackBar.open('Something went wrong', null,{
+          duration: 2000,
+        });
+        this.formLoading = false;
+        console.log(error);
       });
 
   }
@@ -141,6 +155,13 @@ export class CreateAdvComponent {
       contractInfo: this.contractCategoryForm.value
     }
     this.changeTabIndex(5);
+  }
+  getCountries() {
+    this.advService.getCountries()
+      .subscribe( data => {
+        console.log(data);
+        this.countries = data;
+      })
   }
 
 }
