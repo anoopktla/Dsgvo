@@ -66,7 +66,7 @@ public class CustomerService {
                 customerFromDb.setBuildingNumber(customer.getCompanyInfo().getNo());
                 customerFromDb.setStreet(customer.getCompanyInfo().getStreet());
                 //personal details
-                customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhoneNumber());
+                customerFromDb.setPhoneNumber(customer.getPersonDetails().getPhone());
                 customerFromDb.setEmailAddress(customer.getPersonDetails().getEmail());
                 customerFromDb.setPosition(customer.getPersonDetails().getPosition());
                 customerFromDb.setLastName(customer.getPersonDetails().getLastName());

@@ -14,7 +14,7 @@ public class EmailService {
     public void sendEmail(CustomerDao customerDao){
         //TODO hardcoded values
 
-        emailUtil.sendEmail("Auftragsdatenverarbeitung", customerDao);
+        emailUtil.sendEmail("ADV email with attachment", customerDao);
 
 
     }

@@ -11,4 +11,9 @@ public class HomeController {
     public String home() {
         return "index";
     }
+
+    @RequestMapping("adv/create-adv")
+    public String createAdv() {
+        return "index";
+    }
 }

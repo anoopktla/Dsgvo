@@ -26,7 +26,7 @@ public class OrikaConfig {
                 .field("personDetails.lastName", "lastName")
                 .field("personDetails.position", "position")
                 .field("personDetails.email", "emailAddress")
-                .field("personDetails.phoneNumber", "phoneNumber")
+                .field("personDetails.phone", "phoneNumber")
                 //company info starts
                 .field("companyInfo.companyName", "companyName")
                 .field("companyInfo.street", "street")
