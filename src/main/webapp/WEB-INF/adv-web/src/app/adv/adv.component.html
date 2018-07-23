@@ -1,0 +1,9 @@
+<nav mat-tab-nav-bar>
+    <div mat-tab-link routerLink="/">
+        <img class="img-fluid" src="https://www.logicline.de/wordpress/wp-content/uploads/2015/01/logicline_logo_200.png"> </div>
+    <div mat-tab-link routerLink="setting" routerLinkActive #rla="routerLinkActive" active="rla.isActive">Setting</div>
+    <div mat-tab-link routerLink="create-adv" routerLinkActive #rla="routerLinkActive" active="rla.isActive">Create ADV</div>
+    <div mat-tab-link routerLink="email-template" routerLinkActive #rla="routerLinkActive" active="rla.isActive">Email Template</div> 
+    
+</nav>
+<router-outlet></router-outlet>

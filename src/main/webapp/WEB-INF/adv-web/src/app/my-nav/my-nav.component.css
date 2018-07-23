@@ -1,0 +1,14 @@
+.technical-measures{
+ margin-left: 15px;
+}
+.contract-add{
+  font-size: 25px;
+  color:red;  
+}
+.spinner{
+ position: fixed;
+ left:50%;
+ top:50%;
+ 
+ margin: -50px 0 0 -50px;
+}
