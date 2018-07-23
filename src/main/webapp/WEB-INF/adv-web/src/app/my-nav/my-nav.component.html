@@ -1,9 +1,7 @@
 <div class="spinner" [hidden]="!formLoading">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
-
 <mat-tab-group [selectedIndex]="selectedTab" [color]="red">
-
   <mat-tab label="Privacy Policy">
     <form [formGroup]="privacyForm">
       <div class="privacy-container ">
@@ -141,7 +139,7 @@
                   <div>
                     <i class="fa fa-plus-circle contract-add" (click)="addNewRow()"></i> add </div>
                   <div *ngIf="contractCategoryForm.controls.categoryDetails.controls.length > 1">
-                    <i class="fa fa-minus-circle contract-add" (click)="deleteRow()"></i> remove </div>
+                    <i class="fa fa-minus-circle contract-add" (click)="deleteRow(i)"></i> remove </div>
                 </div>
               </div>
             </div>
@@ -194,16 +192,14 @@
             </div>
             <div class="form-group row">
               <div class="form-check">
-                  <mat-checkbox formControlName="isAvailability">availability control</mat-checkbox>
-
+                <mat-checkbox formControlName="isAvailability">availability control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="availabilityControl"> </div>
             </div>
             <div class="form-group row">
               <div class="form-check">
-                 <mat-checkbox formControlName="isSeparation">seperation control</mat-checkbox>
-
+                <mat-checkbox formControlName="isSeparation">seperation control</mat-checkbox>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control" formControlName="separationControl"> </div>
@@ -270,110 +266,118 @@
     <section class="col-12">
       <h6 class="card-title">Contract Details</h6>
       <div class="privacy-container">
-
-        <mat-checkbox>I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
+        <mat-checkbox [checked]="this.privacyForm.value.checkboxOne">I accept to receive information from logicline throgh e-mail about different topics such as digitalization. At any
           point I can cancel that subscription through email or through clicking the unsubscribe link at the end of each
           news letter </mat-checkbox>
-        <mat-checkbox>I have read the references to data security and accept them </mat-checkbox>
+        <mat-checkbox  [checked]="this.privacyForm.value.checkboxTwo">I have read the references to data security and accept them </mat-checkbox>
       </div>
     </section>
-    <form class="col-12">
-      <h6 class="card-title">Company information</h6>
-      <div class="form-group row">
-        <label class="col-3">Company</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.companyName}}</div>
+    <section class="col-12 row">
+      <form class="col-6">
+        <h6 class="card-title">Company information</h6>
+        <div class="form-group row">
+          <label class="col-3">Company</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.companyName}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Street</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+        <div class="form-group row">
+          <label class="col-3">Street</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">No</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+        <div class="form-group row">
+          <label class="col-3">No</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.street}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Address Line 2</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.address}}</div>
+        <div class="form-group row">
+          <label class="col-3">Address Line 2</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.address}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Zip Code</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.zip}}</div>
+        <div class="form-group row">
+          <label class="col-3">Zip Code</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.zip}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">City</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.city}}</div>
+        <div class="form-group row">
+          <label class="col-3">City</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.city}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Country</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.country}}</div>
+        <div class="form-group row">
+          <label class="col-3">Country</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.companyInfo">{{adv.companyInfo.country}}</div>
+          </div>
         </div>
-      </div>
-    </form>
-    <form class="col-12">
-      <h6 class="card-title">Contact Person</h6>
-      <div class="form-group row">
-        <label class="col-3">Salution</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.salutation}}</div>
+      </form>
+      <form class="col-6">
+        <h6 class="card-title">Contact Person</h6>
+        <div class="form-group row">
+          <label class="col-3">Salution</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.salutation}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">First Name</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.firstName}}</div>
+        <div class="form-group row">
+          <label class="col-3">First Name</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.firstName}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Last Name</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.lastName}}</div>
+        <div class="form-group row">
+          <label class="col-3">Last Name</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.lastName}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Position</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.position}}</div>
+        <div class="form-group row">
+          <label class="col-3">Position</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.position}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Email</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.email}}</div>
+        <div class="form-group row">
+          <label class="col-3">Email</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.email}}</div>
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-3">Phone</label>
-        <div class="col-5">
-          <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.phone}}</div>
+        <div class="form-group row">
+          <label class="col-3">Phone</label>
+          <div class="col-5">
+            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.phone}}</div>
+          </div>
         </div>
-      </div>
-    </form>
-    <form>
+      </form>
+    </section>
+ 
       <div class="contract-details col-12">
         <h6 class="card-title">Contract Details</h6>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="categotyData">Category of data</label>
-            <input type="text" class="form-control"> </div>
-          <div class="form-group col-md-3">
-            <label for="collectionPurpose">Purpose of collection,processing or use of data</label>
-            <input type="text" class="form-control"> </div>
-          <div class="form-group col-md-4">
-            <label for="position">Category of data subjects the date relates to</label>
-            <input type="text" class="form-control"> </div>
+        <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Category of data</th>
+              <th>Purpose of collection,processing or use of data</th>
+              <th> Category of data subjects the date relates to</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories">
+              <td>{{category.categoryOfData}}</td>
+              <td>{{category.categoryOfSubjects}}</td>
+              <td>{{category.purposeOfCollection}}</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
       </div>
       <div class="col-12 contract-tom  row">
@@ -381,103 +385,113 @@
           <p class="card-title">Technical and organisational measures (TOM)</p>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isPhysicalAccess" disabled>
               <label class="col-form-label">physical access control</label>
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control"> </div>
+              <input type="text" class="form-control" [(ngModel)]="this.contractCategoryForm.value.physicalAccessControl" disabled> </div>
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isLogicalAccess" disabled>
               <label class="col-form-label">logical access control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.logicalAccessControl" disabled> </div>
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isDataAccess" disabled>
               <label class="col-form-label">data access control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.dataAccessControl" disabled> </div>
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isDataTransfer" disabled>
               <label class="col-form-label">data transfer control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.dataTransferControl" disabled> </div>
           </div>
           <div class="form-group row ">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isDataEntry" disabled>
               <label class="col-form-label">data entry control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.dataEntryControl" disabled> </div>
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.controlOfProcessingRequired" disabled>
               <label class="col-form-label">control of processing Instructions</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control" [(ngModel)]="this.contractCategoryForm.value.dataEntryControl" disabled> </div>
           </div>
           <div class="form-group row">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input">
+            <div class="form-check" >
+              <input type="checkbox" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isAvailability" disabled>
               <label class="col-form-label">availability control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.availabilityControl" disabled> </div>
           </div>
           <div class="form-group row">
             <div class="form-check">
-              <input type="checkbox" value="true" class="form-check-input">
+              <input type="checkbox" value="true" class="form-check-input"  [(ngModel)]="this.contractCategoryForm.value.isSeparation" disabled>
               <label class="col-form-label">separation control</label>
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control"> </div>
+              <input type="text" class="form-control"  [(ngModel)]="this.contractCategoryForm.value.separationControl" disabled> </div>
           </div>
         </div>
         <div class="col-4">
           <p class="card-title">Validity</p>
           <div class="row">
-            <mat-form-field>
-              <input matInput> </mat-form-field>
+           
+            <div class="col-md-6">
+              <label class="col-form-label">Valid From</label>
+            </div>
+            <div class="col-md-6">
+              {{this.contractCategoryForm.value.validFrom}}
+            </div>
+
           </div>
           <div class="row">
-            <mat-form-field>
-              <input matInput> </mat-form-field>
+            <div class="col-md-6">
+              <label class="col-form-label">Valid To</label>
+            </div>
+            <div class="col-md-6">
+              {{this.contractCategoryForm.value.validTo}}
+            </div>
           </div>
           <div class="row">
-            <mat-checkbox>permanent </mat-checkbox>
+            <mat-checkbox [(ngModel)]="this.contractCategoryForm.value.permanent" >permanent </mat-checkbox>
           </div>
         </div>
       </div>
-    </form>
+   
     <form class="col-12">
       <h6 class="card-title">Email Details</h6>
       <div class="form-group row">
         <label class="col-3">Email Templates</label>
         <div class="col-5">
-          <div class="preview-info"  *ngIf="adv.emailDetails">{{adv.emailDetails.emailTemplate}}</div>
+          <div class="preview-info" *ngIf="adv.emailDetails">{{adv.emailDetails.emailTemplate}}</div>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-3">CC</label>
         <div class="col-5">
-          <div class="preview-info"   *ngIf="adv.emailDetails">{{adv.emailDetails.cc}}</div>
+          <div class="preview-info" *ngIf="adv.emailDetails">{{adv.emailDetails.cc}}</div>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-3">bcc</label>
         <div class="col-5">
-          <div class="preview-info"  *ngIf="adv.emailDetails">{{adv.emailDetails.bcc}}</div>
+          <div class="preview-info" *ngIf="adv.emailDetails">{{adv.emailDetails.bcc}}</div>
         </div>
       </div>
     </form>

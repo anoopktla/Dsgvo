@@ -18,6 +18,7 @@ export class CreateAdvComponent {
   contractCategoryForm: FormGroup;
   adv: object;
   countries: any;
+  categories:any;
   formLoading:boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -106,7 +107,6 @@ export class CreateAdvComponent {
   }
 
   deleteRow(index: number) {
-
     const control = <FormArray>this.contractCategoryForm.controls['categoryDetails'];
     control.removeAt(index);
   }
@@ -126,7 +126,6 @@ export class CreateAdvComponent {
     this.initDate.getDate()
   );
   changeTabIndex(index): void {
-    console.log(this.contactForm);
     this.selectedTab = index;
   }
   createAdv(): void {
@@ -154,6 +153,8 @@ export class CreateAdvComponent {
       emailDetails: this.emailInfoForm.value,
       contractInfo: this.contractCategoryForm.value
     }
+    console.log(this.contractCategoryForm.value);
+    this.categories=this.contractCategoryForm.value.categoryDetails;
     this.changeTabIndex(5);
   }
   getCountries() {
