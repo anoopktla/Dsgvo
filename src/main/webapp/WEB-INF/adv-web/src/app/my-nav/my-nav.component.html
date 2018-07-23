@@ -323,37 +323,37 @@
         <div class="form-group row">
           <label class="col-3">Salution</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.salutation}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.salutation}}</div>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-3">First Name</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.firstName}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.firstName}}</div>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-3">Last Name</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.lastName}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.lastName}}</div>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-3">Position</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.position}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.position}}</div>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-3">Email</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.email}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.email}}</div>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-3">Phone</label>
           <div class="col-5">
-            <div class="preview-info" *ngIf="adv.contactPerson">{{adv.contactPerson.phone}}</div>
+            <div class="preview-info" *ngIf="adv.personDetails">{{adv.personDetails.phone}}</div>
           </div>
         </div>
       </form>
@@ -456,7 +456,7 @@
               <label class="col-form-label">Valid From</label>
             </div>
             <div class="col-md-6">
-              {{this.contractCategoryForm.value.validFrom}}
+              {{this.contractCategoryForm.value.validFrom |date :'shortDate'}}
             </div>
 
           </div>
@@ -465,7 +465,7 @@
               <label class="col-form-label">Valid To</label>
             </div>
             <div class="col-md-6">
-              {{this.contractCategoryForm.value.validTo}}
+              {{this.contractCategoryForm.value.validTo |date :'shortDate'}}
             </div>
           </div>
           <div class="row">
