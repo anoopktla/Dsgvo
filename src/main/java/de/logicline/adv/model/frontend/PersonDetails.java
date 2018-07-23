@@ -21,7 +21,7 @@ public class PersonDetails {
     private String email;
 
     @NotNull
-    private Long phoneNumber;
+    private Long phone;
 
     public String getSalutation() {
         return salutation;
@@ -63,11 +63,11 @@ public class PersonDetails {
         this.email = email;
     }
 
-    public Long getPhoneNumber() {
-        return phoneNumber;
+    public Long getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 }

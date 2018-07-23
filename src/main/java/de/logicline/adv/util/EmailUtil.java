@@ -86,7 +86,23 @@ public class EmailUtil {
 
                 MimeBodyPart messageBodyPart = new MimeBodyPart();
                 if(!StringUtils.isEmpty(customerDao.getEmailTemplate())){
-                    messageBodyPart.setContent(customerDao.getEmailTemplate(), CONTENT_TYPE);
+
+                    switch (customerDao.getEmailTemplate()){
+                        case "English":
+                        messageBodyPart.setContent("Please find the attached adv document. \n" +
+                                "<br>Regards <br>Logicline support team", CONTENT_TYPE);
+                        break;
+                        case "German":
+                            messageBodyPart.setContent("\n" +
+                                    "Bitte finden Sie das beigefügte adv Dokument.\n" +
+                                    "<br>Grüße <br> Logicline-Support-Team", CONTENT_TYPE);
+                            break;
+
+                            default:
+                                messageBodyPart.setContent(customerDao.getEmailTemplate(), CONTENT_TYPE);
+
+                    }
+
                 }else {
                     messageBodyPart.setContent("Auftragsdatenverarbeitung ", CONTENT_TYPE);
                 }

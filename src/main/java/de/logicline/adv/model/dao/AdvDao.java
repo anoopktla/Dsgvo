@@ -36,6 +36,7 @@ public class AdvDao {
     private String controlOfProcessing;
     private String availabilityControl;
     private String separationControl;
+    private String processControl;
 
     private  boolean isPermanent;
     private boolean isPhysicalAccess;
@@ -245,5 +246,13 @@ public class AdvDao {
 
     public void setDataCategoryDao(List<DataCategoryDao> dataCategoryDao) {
         this.dataCategoryDao = dataCategoryDao;
+    }
+
+    public String getProcessControl() {
+        return processControl;
+    }
+
+    public void setProcessControl(String processControl) {
+        this.processControl = processControl;
     }
 }
