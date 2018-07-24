@@ -3,7 +3,9 @@ package de.logicline.adv.controller.admin;
 import de.logicline.adv.model.dao.CustomerDao;
 import de.logicline.adv.util.CustomerUtil;
 import de.logicline.adv.util.EmailUtil;
+import de.logicline.adv.util.PdfManager;
 import de.logicline.adv.util.PdfUtil;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Controller
@@ -28,6 +31,10 @@ public class TestController {
     PdfUtil pdfUtil;
     @Autowired
     EmailUtil emailUtil;
+
+    @Autowired
+    private PdfManager pdfManager;
+
     private  static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
 
@@ -77,6 +84,27 @@ public class TestController {
         }
         return new ResponseEntity<>(
                 message, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/pdf2", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getNewPdf() throws Exception {
+        CustomerDao customerDao = CustomerUtil.createDummyCustomer("anoop.krishnapillai@logicline.de",pdfUtil);
+        InputStream in = new ByteArrayInputStream(pdfManager.generatePdf(customerDao));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT");
+        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, HttpHeaders.CONTENT_TYPE);
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "filename=" + "adv.pdf");
+        headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+        headers.add(HttpHeaders.PRAGMA, "no-cache");
+        headers.add(HttpHeaders.EXPIRES, "0");
+        headers.setContentLength(in.available());
+        ResponseEntity<InputStreamResource> response = new ResponseEntity<>(
+                new InputStreamResource(in), headers, HttpStatus.OK);
+        in.close();
+        LOGGER.info("Rendered pdf sucessfully ");
+        return response;
     }
 
 

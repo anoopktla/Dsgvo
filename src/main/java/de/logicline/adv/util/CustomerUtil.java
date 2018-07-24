@@ -30,7 +30,7 @@ public class CustomerUtil {
         customerDao.setBcc("anoop.krishnapillai@heidelsoft.de");
         customerDao.setEmailTemplate("Test email body");
         AdvDao advDao = new AdvDao();
-        advDao.setAdvInPdfFormat( IOUtils.toByteArray(pdfUtil.createPdf(customerDao)));
+        //advDao.setAdvInPdfFormat( IOUtils.toByteArray(pdfUtil.createPdf(customerDao)));
         List<AdvDao> advDaos = new ArrayList<>();
         advDaos.add(advDao);
         customerDao.setAdvDao(advDaos);

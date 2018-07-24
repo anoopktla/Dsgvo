@@ -33,7 +33,6 @@ import java.util.Locale;
 
 @Component
 public class PdfUtil {
-    //TODO most parts are  hardcoded for now, as we need to finalize the fields and their types from front-end.
 
     private MessageSource messageSource;
     private ResourceLoader resourceLoader;
@@ -42,7 +41,7 @@ public class PdfUtil {
     private static final float MARGIN = 50;
     private  static final Logger LOGGER = LoggerFactory.getLogger(PdfUtil.class);
     
-   /* @Value("${pdf.de.firstPart}")*/
+
     private static String templateDeFirstPart = "Template_logicline_de.pdf";
 
    /* @Value("${pdf.de.secondPart}")*/
@@ -69,7 +68,7 @@ public class PdfUtil {
     }
 
     public InputStream createPdf(CustomerDao customer) throws Exception {
-        try {
+       /* try {
             
             Resource resource = resourceLoader.getResource(PATH_PREFIX + FILE_SEPARATOR + templateDeFirstPart);
             InputStream fileAsInputStream = resource.getInputStream();
@@ -95,7 +94,7 @@ public class PdfUtil {
 
         } catch (IOException ie) {
            LOGGER.debug("unable to create pdf template ",ie);
-        }
+        }*/
         return null;
     }
 
