@@ -30,9 +30,6 @@ public class EmailUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);
     private static final String PDF_FILE_NAME = "adv.pdf";
 
-    @Autowired
-    PdfUtil pdfUtil;
-
     @Value("${email.username}")
     private String emailUserName;
 

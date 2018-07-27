@@ -119,6 +119,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.0.2.GA</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -130,10 +135,9 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <!-- https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/
+               <!--  https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/
                 this installs node, fetches dependent modules, run npm build and copies generated resources
-                 to /dist folder
-                -->
+                 to /dist folder-->
                 <version>1.6</version>
                 <configuration>
                     <workingDirectory>src/main/webapp/WEB-INF/adv-web/</workingDirectory>
@@ -147,7 +151,7 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
+                           <!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions-->
                             <nodeVersion>v8.11.2</nodeVersion>
                             <npmVersion>5.6.0</npmVersion>
                         </configuration>
@@ -179,7 +183,7 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <!-- optional: if not specified, it will run webpack's default
+                           <!-- optional: if not specified, it will run webpack's default
                             build (and you can remove this whole <configuration> section.) -->
                             <arguments>-p</arguments>
                         </configuration>

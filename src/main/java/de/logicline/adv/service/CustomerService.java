@@ -4,9 +4,8 @@ import de.logicline.adv.dao.CustomerRepository;
 import de.logicline.adv.model.dao.AdvDao;
 import de.logicline.adv.model.dao.CustomerDao;
 import de.logicline.adv.model.frontend.Customer;
-import de.logicline.adv.util.PdfUtil;
+import de.logicline.adv.util.PdfManager;
 import ma.glasnost.orika.MapperFacade;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +17,16 @@ import java.util.List;
 public class CustomerService {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
 
     @Autowired
-    PdfUtil pdfUtil;
+    private PdfManager pdfManager;
 
     @Autowired
-    MapperFacade mapperFacade;
+    private MapperFacade mapperFacade;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
@@ -43,7 +42,7 @@ public class CustomerService {
             //TODO for phase 1, we don't have user login feature, so just taking first adv from list to create pdf
             LOGGER.info("customerDao ",customerDaoToBeSaved.toString());
             LOGGER.info("adv size in customerDao is {} ",customerDaoToBeSaved.getAdvDao().size());
-            byte[] pdfInByteFormat = IOUtils.toByteArray(pdfUtil.createPdf(customerDaoToBeSaved));
+            byte[] pdfInByteFormat = pdfManager.generatePdf(customerDaoToBeSaved);
             LOGGER.info("size of pdf in bytes is {}",pdfInByteFormat.length);
             if (pdfInByteFormat.length == 0) {
                 LOGGER.error("error while rendering adv in pdf format");

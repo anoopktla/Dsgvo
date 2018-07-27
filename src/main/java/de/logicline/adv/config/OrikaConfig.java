@@ -36,7 +36,7 @@ public class OrikaConfig {
                 .field("companyInfo.city", "city")
                 .field("companyInfo.country", "country")
 
-                .field("contractInfo", "advDao[0]")
+                .field("contractInfo", "advDao{}")
                 .field("emailDetails.cc", "cc")
                 .field("emailDetails.bcc", "bcc")
                 .field("emailDetails.emailTemplate", "emailTemplate")

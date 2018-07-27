@@ -3,7 +3,7 @@ package de.logicline.adv.controller.admin;
 import de.logicline.adv.model.dao.CustomerDao;
 import de.logicline.adv.util.CustomerUtil;
 import de.logicline.adv.util.EmailUtil;
-import de.logicline.adv.util.PdfUtil;
+import de.logicline.adv.util.PdfManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +18,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Controller
 @RequestMapping("/adv-service/v1/test")
 public class TestController {
     //TODO to be removed ?, this is a sample end point for testing pdf generation, email sending etc
+
     @Autowired
-    PdfUtil pdfUtil;
+    private EmailUtil emailUtil;
+
     @Autowired
-    EmailUtil emailUtil;
+    private PdfManager pdfManager;
+
     private  static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
 
     @RequestMapping(value = "/pdf", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getAsPdf() throws Exception {
-        CustomerDao customerDao = CustomerUtil.createDummyCustomer("anoop.krishnapillai@logicline.de",pdfUtil);
-        InputStream in = pdfUtil.createPdf(customerDao);
+        CustomerDao customerDao = CustomerUtil.createDummyCustomer("anoop.krishnapillai@logicline.de",pdfManager);
+        InputStream in =  new ByteArrayInputStream(pdfManager.generatePdf(customerDao));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
@@ -66,7 +70,7 @@ public class TestController {
 
         String message;
 
-        if (emailUtil.sendEmail("test email",  CustomerUtil.createDummyCustomer(id,pdfUtil))) {
+        if (emailUtil.sendEmail("test email",  CustomerUtil.createDummyCustomer(id,pdfManager))) {
             message = "Email sent successfully to " + id;
             LOGGER.info(message);
 
@@ -78,6 +82,8 @@ public class TestController {
         return new ResponseEntity<>(
                 message, headers, HttpStatus.OK);
     }
+
+
 
 
 }
